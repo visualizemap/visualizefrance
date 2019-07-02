@@ -3,26 +3,36 @@
 <head>
 <meta charset='utf-8' />
 
-<title>French population by city</title>
+<title>Population des communes françaises</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
 <style>
 body { margin:0; padding:0; }
-#map { position:absolute; top:0; bottom:0; width:100%; }
+#map { position:absolute; top:0; bottom:0; width:100%;  z-index: -1; }
 </style>
 </head>
 <body>
-
-  <img src="/Users/jairson/Desktop/logo2.png" alt="Girl in a jacket" style="width:18px;height:18px;left:9px; top:95%; bottom:0; position: absolute; z-index: 3;">
 
   <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
   <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
 
   <style>
 
-  a:link, a:visited {
-    color: #212121;
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 0px;
+  color: #9E9E9E;
+  max-width: 100%;
+  padding: 1px;
+}
+
+a:link, a:visited {
+    color: #424242;
 
   .geocoder {
   position:absolute;
@@ -32,18 +42,57 @@ body { margin:0; padding:0; }
   margin-left:-25%;
   top:20px;
   }
-  .mapboxgl-ctrl-geocoder { min-width:100%; }
-  </style>
-  <div id='map'></div>
-  <div id='geocoder' class='geocoder'></div>
+
+.mapboxgl-ctrl-geocoder { min-width:100%; }
+
+
+</style>
+
+<div id='map'></div>
+<div id='geocoder' class='geocoder'></div>
 
 <style>
+
 .mapboxgl-popup {
     max-width: 600px;
     color: #212121;
-    font: 13px/5px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    opacity: 0.9;
+    border-radius: 5px;
+    line-height: 140%;
 }
+
+.mapboxgl-popup-close-button {
+  font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  line-height: 140%;
+  font-weight: bold;
+  color: #212121;
+}
+
+.legend {
+  margin: auto;
+  height:18px;
+  left:50%;
+  bottom:2%;
+  position: absolute;
+  z-index: 2;
+}
+
+.logo {
+  margin: auto;
+  height:20px;
+  left:50%;
+  top:2%;
+  position: absolute;
+  z-index: 2;
+}
+
+
 </style>
+
+<a href="https://www.w3schools.com/html/" target="_blank"><img src="https://visualizemap.github.io/visualizefrance/logo-text-2.png" class="logo" alt="Logo visualize map"></a>
+<a href="https://visualizemap.github.io/visualizefrance/screen.png" target="_blank"><img src="https://visualizemap.github.io/visualizefrance/text-legend.png" class="legend" alt="Légende de la carte"></a>
+
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
@@ -55,52 +104,68 @@ zoom: 4.5 // starting zoom
 });
 var hoveredStateId =  null;
 
+var scale = new mapboxgl.ScaleControl({
+    maxWidth: 300,
+    unit: 'imperial',
+});
+
+map.addControl(scale,'bottom-left');
+
+scale.setUnit('metric');
+
 
 // When a click event occurs near a polygon, open a popup at the location of
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-city-centroid'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-municipality-centroid','france-municipality'] });
     if (!features.length) {
         return;
     }
 
     var feature = features[0];
 
-    var popup = new mapboxgl.Popup()
+    var popup = new mapboxgl.Popup({closeButton: true})
         .setLngLat(map.unproject(e.point))
-        .setHTML('<strong>'+"Name: "+feature.properties.name
-        +'<p>'+"Division: "+feature.properties.name_div
-        +'<p>'+"Region: "+feature.properties.name_reg
-        +'<p>'+"Postcode: "+feature.properties.postcode
-        +'<p>'+"Population: "+feature.properties.pop16
-        +'<p>'+"Density (P/Km²): "+feature.properties.density
-        +'<p>'+"Land Area (Km²) : "+feature.properties.surface
-        +'<p>'+"Wikipedia: "+'<a href="' + "https://en.wikipedia.org/wiki/" + feature.properties.wikipedia+ '"target="_blank">' + feature.properties.wikipedia + '</a>'+'</strong>')
+        .setHTML(
+        '<strong>'
+        +'<table>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la commune"+'</span>'+'</td></tr></table>'
+        +'<table>'
+        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.munm+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Code Postale"+'</td><td>'+feature.properties.postcode+'</td></tr>'
+        +'<tr><td>'+"Département"+'</td><td>'+feature.properties.depm+'</td></tr>'
+        +'<tr><td>'+"Région"+'</td><td>'+feature.properties.regionm+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
+        +'<tr><td>'+"Rang"+'</td><td>'+feature.properties.rank+'</td></tr>'
+        +'<tr><td>'+"Type de commune"+'</td><td>'+feature.properties.categorie+'</td></tr>'
+        +'<tr><td>'+"Densité (Hab/Km²)"+'</td><td>'+feature.properties.density+'</td></tr>'
+        +'<tr><td>'+"Evolution Population"+'</td><td>'+feature.properties.popevo1+'</td></tr>'
+        +'<tr><td>'+"Indice de vieillissement"+'</td><td>'+feature.properties.ageing+'</td></tr>'
+        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.household+'</td></tr>'
+        +'<tr><td>'+"Taille moy. des ménages"+'</td><td>'+feature.properties.ahousehold+'</td></tr>'
+        +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.mun+ '"target="_blank">' + 'Insee ' +feature.properties.munm+ '</a>'+'</td></tr></table>'
+        +'</strong>')
         .addTo(map)
-        .setMaxWidth("800px");
+        .setMaxWidth("500px");
             });
 
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-city-centroid'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-municipality-centroid','france-municipality'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl(),'top-left');
 
-map.addControl(new mapboxgl.FullscreenControl(),'top-left');
+map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-left');
 
 map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
 
+
 </script>
 
-
-
-  
-  
-  
 </body>
 </html>

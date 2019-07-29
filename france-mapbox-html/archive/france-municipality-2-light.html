@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+
+<title>Population des communes françaises</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
+
+
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%;  z-index: -1; }
+</style>
+</head>
+<body>
+
+  <nav id="menu"></nav>
+  <div id='map'></div>
+  <div id='geocoder' class='mapboxgl-ctrl-geocoder'></div>
+
+  <style>
+  #menu {
+  background: #fff;
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  right: 10px;
+  border-radius: 3px;
+  width: 120px;
+  border: 1px solid rgba(0,0,0,0.4);
+  font-family: 'Open Sans', sans-serif;
+  content: 'ttttt';
+
+  }
+
+  #menu a {
+  font-size: 13px;
+  color: #404040;
+  display: block;
+  margin: 0;
+  padding: 0;
+  padding: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  text-align: center;
+  content: 'ttttt';
+
+  }
+
+  #menu a:last-child {
+  border: none;
+  content: 'ttttt';
+
+  }
+
+  #menu a:hover {
+  background-color: #f8f8f8;
+  color: #404040;
+  content: 'ttttt';
+
+  }
+
+  #menu a.active {
+  background-color: #3887be;
+  color: #ffffff;
+  content: 'ttttt';
+
+  }
+
+  #menu a.active:hover {
+  background: #3074a4;
+  content: 'ttttt';
+
+  }
+  </style>
+
+
+  <style>
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 0px;
+  color: #9E9E9E;
+  max-width: 100%;
+  padding: 1px;
+}
+
+a:link, a:visited {
+    color: #424242;
+
+ .geocoder {
+  position:absolute;
+  z-index:3;
+  width:0%;
+  left:0%;
+  margin-left:-2%;
+  top:20px;
+  }
+
+  .mapboxgl-ctrl-geocoder {
+    min-width:100%;
+    z-index:3;
+ }
+
+</style>
+
+
+
+<style>
+
+.mapboxgl-popup {
+    max-width: 600px;
+    color: #212121;
+    font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    opacity: 0.9;
+    border-radius: 5px;
+    line-height: 140%;
+}
+
+.mapboxgl-popup-close-button {
+  font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  line-height: 140%;
+  font-weight: bold;
+  color: #212121;
+}
+
+.legend {
+  position: absolute;
+   top: 0; bottom: -95%; left: 0; right: 0;
+   margin: auto;
+  height:20px;
+  z-index: 2;
+
+}
+
+.logo {
+  position: absolute;
+   top: 1%; bottom: 0; left: 1%; right: 0%;
+  height:22px;
+
+  z-index: 2;
+}
+
+
+</style>
+
+<a href="https://www.w3schools.com/html/" target="_blank"><img src="/Users/jairson/Desktop/logo-text.png" class="logo" alt="Logo visualize map"></a>
+<a href="https://www.w3schools.com/html/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/legende-text.png" class="legend" alt="Légende de la carte"></a>
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/visualizemap/cjxl4nk360k8z1cnriosvwxzr', // stylesheet location
+center: [2.316141, 46.084976], // starting position [lng, lat]
+zoom: 4.5 // starting zoom
+});
+var toggleableLayerIds = [ 'france-municipality-centroid','france-municipality' ];
+
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+    var id = toggleableLayerIds[i];
+
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = id;
+
+    link.onclick = function (e) {
+        var clickedLayer = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+        if (visibility === 'visible') {
+            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            this.className = '';
+        } else {
+            this.className = 'active';
+            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+    };
+
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
+}
+
+var hoveredStateId =  null;
+
+var scale = new mapboxgl.ScaleControl({
+    maxWidth: 300,
+    unit: 'imperial',
+});
+
+
+map.addControl(scale,'bottom-left');
+
+scale.setUnit('metric');
+
+
+// When a click event occurs near a polygon, open a popup at the location of
+// the feature, with description HTML from its properties.
+
+map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-centroide','france-municipality-centroid','france-municipality'] });
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    var popup = new mapboxgl.Popup({closeButton: true})
+        .setLngLat(map.unproject(e.point))
+        .setHTML(
+        '<strong>'
+        +'<table>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la commune"+'</span>'+'</td></tr></table>'
+        +'<table>'
+        +'<tr><td>'+"pop"+'</td><td>'+feature.properties.pop+'</span>'+'</td></tr>'
+        +'<tr><td>'+"pope"+'</td><td>'+feature.properties.pope+'</span>'+'</td></tr>'
+        +'<tr><td>'+"densite"+'</td><td>'+feature.properties.csp4p+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.munm+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Code Postale"+'</td><td>'+feature.properties.postcode+'</td></tr>'
+        +'<tr><td>'+"Département"+'</td><td>'+feature.properties.depm+'</td></tr>'
+        +'<tr><td>'+"Région"+'</td><td>'+feature.properties.regionm+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
+        +'<tr><td>'+"Rang"+'</td><td>'+feature.properties.rank+'</td></tr>'
+        +'<tr><td>'+"Type de commune"+'</td><td>'+feature.properties.categorie+'</td></tr>'
+        +'<tr><td>'+"Densité (Hab/Km²)"+'</td><td>'+feature.properties.density+'</td></tr>'
+        +'<tr><td>'+"Evolution Population"+'</td><td>'+feature.properties.popevo1+'</td></tr>'
+        +'<tr><td>'+"Indice de vieillissement"+'</td><td>'+feature.properties.ageing+'</td></tr>'
+        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.household+'</td></tr>'
+        +'<tr><td>'+"Taille moy. des ménages"+'</td><td>'+feature.properties.ahousehold+'</td></tr>'
+        +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.mun+ '"target="_blank">' + 'Insee ' +feature.properties.munm+ '</a>'+'</td></tr></table>'
+        +'</strong>')
+        .addTo(map)
+        .setMaxWidth("500px");
+            });
+
+// Use the same approach as above to indicate that the symbols are clickable
+// by changing the cursor style to 'pointer'.
+map.on('mousemove', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-centroide', 'france-municipality-centroid','france-municipality'] });
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+});
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl(),'top-right');
+
+map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
+
+/* map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ;*/
+
+
+</script>
+
+</body>
+</html>

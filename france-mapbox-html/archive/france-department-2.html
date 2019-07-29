@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+
+<title>Population des départements français</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+</head>
+<body>
+
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
+
+  <style>
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 0px;
+  color: #9E9E9E;
+  max-width: 100%;
+  padding: 1px;
+}
+
+a:link, a:visited {
+    color: #424242;
+
+  .geocoder {
+  position:absolute;
+  z-index:1;
+  width:50%;
+  left:50%;
+  margin-left:-25%;
+  top:20px;
+  }
+
+.mapboxgl-ctrl-geocoder { min-width:100%; }
+
+</style>
+
+<div id='map'></div>
+<div id='geocoder' class='geocoder'></div>
+
+<style>
+
+.mapboxgl-popup {
+    max-width: 600px;
+    color: #212121;
+    font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    opacity: 0.9;
+    border-radius: 5px;
+    line-height: 140%;
+}
+
+</style>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/visualizemap/cjx1jr4kw0wez1codtscezqwx', // stylesheet location
+center: [2.316141, 46.084976], // starting position [lng, lat]
+zoom: 4.5 // starting zoom
+});
+var hoveredStateId =  null;
+
+// When a click event occurs near a polygon, open a popup at the location of
+// the feature, with description HTML from its properties.
+
+map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-department','france-department-centroid'] });
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    var popup = new mapboxgl.Popup()
+        .setLngLat(map.unproject(e.point))
+        .setHTML(
+        '<strong>'
+        +'<table>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur le département"+'</span>'+'</td></tr></table>'
+        +'<table>'
+        +'<tr><td>'+"Département"+'</td><td>'+feature.properties.depm+'</td></tr>'
+        +'<tr><td>'+"Région"+'</td><td>'+feature.properties.regionm+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
+        +'<tr><td>'+"Rang"+'</td><td>'+feature.properties.rank+'</td></tr>'
+        +'<tr><td>'+"Type de commune"+'</td><td>'+feature.properties.categorie+'</td></tr>'
+        +'<tr><td>'+"Densité (Hab/Km²)"+'</td><td>'+feature.properties.density+'</td></tr>'
+        +'<tr><td>'+"Evolution Population"+'</td><td>'+feature.properties.popevo1+'</td></tr>'
+        +'<tr><td>'+"Indice de vieillissement"+'</td><td>'+feature.properties.ageing+'</td></tr>'
+        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.household+'</td></tr>'
+        +'<tr><td>'+"Taille moyenne des ménages"+'</td><td>'+feature.properties.ahousehold+'</td></tr>'
+        +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=DEP-"+feature.properties.dep+ '"target="_blank">' + 'Insee ' +feature.properties.depm+ '</a>'+'</td></tr></table>'
+        +'</strong>')
+        .addTo(map)
+        .setMaxWidth("800px");
+            });
+
+// Use the same approach as above to indicate that the symbols are clickable
+// by changing the cursor style to 'pointer'.
+map.on('mousemove', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-department','france-department-centroid'] });
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+});
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl(),'top-left');
+
+map.addControl(new mapboxgl.FullscreenControl(),'top-left');
+
+map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
+
+</script>
+
+</body>
+</html>

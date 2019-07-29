@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8' />
 
-<title>Logement données carroyées</title>
+<title>Logements Données Carroyées</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
@@ -99,7 +99,7 @@ a:link, a:visited {
 </style>
 
 <a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/logo-text-light.png" class="logo" alt="Logo visualize map"></a>
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/carreaux/legende-carreaux-logement.png" class="legend" alt="Légende de la carte"></a>
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/carreaux/legende-france-carreaux-logement.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
@@ -141,19 +141,18 @@ map.on('click', function (e) {
         +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
         +'<table>'
         +'<tr><td>'+"Population"+'</td><td>'+feature.properties.ind+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.men+'</td></tr>'
         +'<tr><td>'+"Logements occupés"+'</td><td>'+feature.properties.logtotal+'</td></tr>'
         +'<tr><td>'+"Ménages propriétaires"+'</td><td>'+feature.properties.men_prop+' ('+feature.properties.men_propp+'%)'+'</td></tr>'
         +'<tr><td>'+"Ménages en appartement"+'</td><td>'+feature.properties.men_coll+' ('+feature.properties.men_collp+'%)'+'</td></tr>'
         +'<tr><td>'+"Ménages en maison"+'</td><td>'+feature.properties.men_mais+' ('+feature.properties.men_maisp+'%)'+'</td></tr>'
         +'<tr><td>'+"Logements sociaux"+'</td><td>'+feature.properties.log_soc+' ('+feature.properties.log_socp+'%)'+'</td></tr>'
         +'<tr><td>'+"Log. construits avant 1945"+'</td><td>'+feature.properties.log_av45+' ('+feature.properties.log_av45p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Log.construits entre 1945 et 1969"+'</td><td>'+feature.properties.log_45_70+' ('+feature.properties.log_45_70p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Log. construits entre 1945 et 1969"+'</td><td>'+feature.properties.log_45_70+' ('+feature.properties.log_45_70p+'%)'+'</td></tr>'
         +'<tr><td>'+"Log. construits entre 1970 et 1989"+'</td><td>'+feature.properties.log_70_90+' ('+feature.properties.log_70_90p+'%)'+'</td></tr>'
         +'<tr><td>'+"Log. construits depuis 1990"+'</td><td>'+feature.properties.log_ap90+' ('+feature.properties.log_ap90p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Log. date construction inconnue"+'</td><td>'+feature.properties.log_inc+' ('+feature.properties.log_incp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Surface total logements du carreau"+'</td><td>'+feature.properties.men_surf+'m²'+'</td></tr>'
-        +'<tr><td>'+"Surface moy. logements du carreau"+'</td><td>'+feature.properties.men_surfm+'m²'+'</td></tr></table>'
+        +'<tr><td>'+"Log. construction inconnue"+'</td><td>'+feature.properties.log_inc+' ('+feature.properties.log_incp+'%)'+'</td></tr>'
+        +'<tr><td>'+"Surface total des logements"+'</td><td>'+feature.properties.men_surf+'m²'+'</td></tr>'
+        +'<tr><td>'+"Surface moy. des logements"+'</td><td>'+feature.properties.men_surfm+'m²'+'</td></tr></table>'
         +'</strong>')
         .addTo(map)
         .setMaxWidth("500px");

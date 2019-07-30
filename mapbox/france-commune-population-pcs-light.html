@@ -104,7 +104,7 @@ a:link, a:visited {
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
-style: 'mapbox://styles/visualizemap/cjypjybng01qh1coy9fbhsk7r', // stylesheet location
+style: 'mapbox://styles/visualizemap/cjypq8jcp07g21crev7uiqf7w', // stylesheet location
 center: [2.316141, 46.084976], // starting position [lng, lat]
 zoom: 4.5, // starting zoom
 attributionControl: false
@@ -124,7 +124,7 @@ scale.setUnit('metric');
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-centroide','france-commune-population'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-pcs-centroide','france-commune-population-pcs'] });
     if (!features.length) {
         return;
     }
@@ -143,16 +143,16 @@ map.on('click', function (e) {
         +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
         +'<tr><td>'+"Évolution population"+'</td><td>'+feature.properties.pop_e+'</td></tr>'
         +'<tr><td>'+"Densité (Hab/Km²)"+'</td><td>'+feature.properties.densite+'</td></tr>'
-        +'<tr><td>'+"Pop. 0-14 ans"+'</td><td>'+feature.properties.pop0014+' ('+feature.properties.pop0014_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 15-29 ans"+'</td><td>'+feature.properties.pop1529+' ('+feature.properties.pop1529_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 30-44 ans"+'</td><td>'+feature.properties.pop3044+' ('+feature.properties.pop3044_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 45-59 ans"+'</td><td>'+feature.properties.pop4559+' ('+feature.properties.pop4559_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 60-74 ans"+'</td><td>'+feature.properties.pop6074+' ('+feature.properties.pop6074_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 75-89 ans"+'</td><td>'+feature.properties.pop7589+' ('+feature.properties.pop7589_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 90 ans ou plus"+'</td><td>'+feature.properties.pop90p+' ('+feature.properties.pop90p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. Hommes"+'</td><td>'+feature.properties.poph+' ('+feature.properties.poph_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. Femmes"+'</td><td>'+feature.properties.popf+' ('+feature.properties.popf_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr>'
+        +'<tr><td>'+"Pop. 15 ans ou plus"+'</td><td>'+feature.properties.pop15p+'</td></tr>'
+        +'<tr><td>'+"Agriculteurs exploitants"+'</td><td>'+feature.properties.popcs1+' ('+feature.properties.popcs1_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Artisans, Comm., Chefs entr."+'</td><td>'+feature.properties.popcs2+' ('+feature.properties.popcs2_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Cadres, Prof. intel. sup."+'</td><td>'+feature.properties.popcs3+' ('+feature.properties.popcs3_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Prof. intermédiaires"+'</td><td>'+feature.properties.popcs4+' ('+feature.properties.popcs4_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Employés"+'</td><td>'+feature.properties.popcs5+' ('+feature.properties.popcs5_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ouvriers"+'</td><td>'+feature.properties.popcs6+' ('+feature.properties.popcs6_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Retraités"+'</td><td>'+feature.properties.popcs7+' ('+feature.properties.popcs7_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Autres"+'</td><td>'+feature.properties.popcs8+' ('+feature.properties.popcs8_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Plus d’infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr>'
         +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");
@@ -163,7 +163,7 @@ map.on('click', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-centroide','france-commune-population'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-pcs-centroide','france-commune-population-pcs'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

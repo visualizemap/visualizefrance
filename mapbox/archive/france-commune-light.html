@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8' />
 
-<title>Communes Logements</title>
+<title>Population des communes françaises</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
@@ -84,7 +84,7 @@ a:link, a:visited {
   position: absolute;
   right: 8px;
   bottom: 8px;
-  height:153px;
+  width: 189.028px;
   z-index: 2;
 }
 
@@ -98,15 +98,15 @@ a:link, a:visited {
 </style>
 
 <a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/logo-text-light.png" class="logo" alt="Logo visualize map"></a>
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/commune/legende-france-commune-logement.png" class="legend" alt="Légende de la carte"></a>
+<a href="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/legende-population-densite.png" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/legende-population-densite.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
-style: 'mapbox://styles/visualizemap/cjypub1ov0bad1co6gyam47hf', // stylesheet location
-center: [2.316141, 46.084976], // starting position [lng, lat]
-zoom: 4.5, // starting zoom
+style: 'mapbox://styles/visualizemap/cjy5lnkq90a8g1co39y6685wg', // stylesheet location
+center: [4.859171776685287, 45.73291396168358], // starting position [lng, lat]
+zoom: 10.5, // starting zoom
 attributionControl: false
 });
 var hoveredStateId =  null;
@@ -124,7 +124,7 @@ scale.setUnit('metric');
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-logement-rp-centroide','france-commune-logement-rp'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-centroide','france-commune'] });
     if (!features.length) {
         return;
     }
@@ -138,35 +138,36 @@ map.on('click', function (e) {
         +'<table>'
         +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la commune"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.libcom+'</td></tr>'
-        +'<tr><td>'+"Code postal"+'</td><td>'+feature.properties.cpostal+'</td></tr>'
+        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.libcom+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Code Postale"+'</td><td>'+feature.properties.cpostale+'</td></tr>'
+        +'<tr><td>'+"Département"+'</td><td>'+feature.properties.libdep+'</td></tr>'
         +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
-        +'<tr><td>'+"Logements"+'</td><td>'+feature.properties.log+'</td></tr>'
-        +'<tr><td>'+"Évolution logements"+'</td><td>'+feature.properties.log_e+'%'+'</td></tr>'
-        +'<tr><td>'+"Résidences principales"+'</td><td>'+feature.properties.rp+'</td></tr>'
-        +'<tr><td>'+"Rp. 1 pièce"+'</td><td>'+feature.properties.rp1p+' ('+feature.properties.rp1p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 2 pièces"+'</td><td>'+feature.properties.rp2p+' ('+feature.properties.rp2p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 3 pièces"+'</td><td>'+feature.properties.rp3p+' ('+feature.properties.rp3p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 4 pièces"+'</td><td>'+feature.properties.rp4p+' ('+feature.properties.rp4p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 5 pièces"+'</td><td>'+feature.properties.rp5pp+' ('+feature.properties.rp5pp_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. type maison"+'</td><td>'+feature.properties.rpmaison+' ('+feature.properties.rpmaison_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. type appartement"+'</td><td>'+feature.properties.rpappart+' ('+feature.properties.rpappart_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. occupées propriétaires"+'</td><td>'+feature.properties.rpprop+' ('+feature.properties.rpprop_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. occupées locataires"+'</td><td>'+feature.properties.rploc+' ('+feature.properties.rploc_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. HLM"+'</td><td>'+feature.properties.rphlm+' ('+feature.properties.rphlm_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages avec au moins une voiture"+'</td><td>'+feature.properties.rpvoit1p+' ('+feature.properties.rpvoit1p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr>'
-        +'</table></strong>')
+        +'<tr><td>'+"Evolution Population"+'</td><td>'+feature.properties.pop_e+'</td></tr>'
+        +'<tr><td>'+"Densité (Hab/Km²)"+'</td><td>'+feature.properties.densite+'</td></tr>'
+        +'<tr><td>'+"CSP Cadres"+'</td><td>'+feature.properties.popcs3+' ('+feature.properties.popcs3_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"CSP Ouvriers"+'</td><td>'+feature.properties.popcs6+' ('+feature.properties.popcs6_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"CSP Retraités"+'</td><td>'+feature.properties.popcs7+' ('+feature.properties.popcs7_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.men+'</td></tr>'
+        +'<tr><td>'+"Famille"+'</td><td>'+feature.properties.fam+'</td></tr>'
+        +'<tr><td>'+"Logement"+'</td><td>'+feature.properties.log+'</td></tr>'
+        +'<tr><td>'+"Maison"+'</td><td>'+feature.properties.maison+' ('+feature.properties.maison_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Appartement"+'</td><td>'+feature.properties.appart+' ('+feature.properties.appart_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"HLM"+'</td><td>'+feature.properties.rphlm+' ('+feature.properties.rphlm_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Chômeurs"+'</td><td>'+feature.properties.chom1564+' ('+feature.properties.chom1564_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Salaire Horaire Moy."+'</td><td>'+feature.properties.snhm+'€'+'</td></tr>'
+        +'<tr><td>'+"Supermarché"+'</td><td>'+feature.properties.super+'</td></tr>'
+        +'<tr><td>'+"Ecole Maternelle"+'</td><td>'+feature.properties.ecolemat+'</td></tr>'
+        +'<tr><td>'+"Médecin Généraliste"+'</td><td>'+feature.properties.medecing+'</td></tr>'
+        +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr></table>'
+        +'</strong>')
         .addTo(map)
         .setMaxWidth("500px");
             });
 
-
-
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-logement-rp-centroide','france-commune-logement-rp'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-centroide','france-commune'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

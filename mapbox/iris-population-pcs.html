@@ -99,15 +99,15 @@ a:link, a:visited {
 </style>
 
 <a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/logo-text-light.png" class="logo" alt="Logo visualize map"></a>
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/iris/legende-iris-population-pcs-cadres.png" class="legend" alt="Légende de la carte"></a>
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/iris/legende-france-iris-population-pcs-cadres.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
 style: 'mapbox://styles/visualizemap/cjypx8q8r0s6a1cocqr5jk553', // stylesheet location
-center: [2.316141, 46.084976], // starting position [lng, lat]
-zoom: 4.5, // starting zoom
+center: [4.859171776685287, 45.73291396168358], // starting position [lng, lat]
+zoom: 8.5, // starting zoom
 attributionControl: false
 });
 var hoveredStateId =  null;
@@ -125,7 +125,7 @@ scale.setUnit('metric');
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-centroide','france-iris'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-population-pcs-centroide','france-iris-population-pcs'] });
     if (!features.length) {
         return;
     }
@@ -160,7 +160,7 @@ map.on('click', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-centroide','france-iris'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-population-pcs-centroide','france-iris-population-pcs'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

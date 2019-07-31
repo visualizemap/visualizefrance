@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8' />
 
-<title>Population des communes françaises</title>
+<title>Communes Population</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
@@ -72,7 +72,7 @@ a:link, a:visited {
 }
 
 .mapboxgl-popup-close-button {
-  position:fixed;
+  position:absolute;
   font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   line-height: 140%;
   font-weight: bold;
@@ -82,12 +82,11 @@ a:link, a:visited {
 
 .legend {
   position: absolute;
-   top: 0; bottom: -95%; left: 0; right: 0;
-   margin: auto;
-  height:20px;
+  right: 8px;
+  bottom: 8px;
+  width: 189.028px;
   z-index: 2;
 }
-
 
 .logo {
   position: absolute;
@@ -98,24 +97,34 @@ a:link, a:visited {
 }
 </style>
 
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/logo-text-light.png" class="logo" alt="Logo visualize map"></a>
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/commune/legende-france-commune-population-retraites.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
-style: 'mapbox://styles/visualizemap/cjyfi00rd4xey1do8cwr2zdb3', // stylesheet location
-center: [2.316141, 46.084976], // starting position [lng, lat]
-zoom: 4.5, // starting zoom
+style: 'mapbox://styles/visualizemap/cjypq8jcp07g21crev7uiqf7w', // stylesheet location
+center: [4.859171776685287, 45.73291396168358], // starting position [lng, lat]
+zoom: 8.5, // starting zoom
 attributionControl: false
+});
+var hoveredStateId =  null;
 
+var scale = new mapboxgl.ScaleControl({
+    maxWidth: 150,
+    unit: 'imperial',
 });
 
+map.addControl(scale,'bottom-left');
+
+scale.setUnit('metric');
 
 // When a click event occurs near a polygon, open a popup at the location of
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-centroide','france-commune'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-pcs-centroide','france-commune-population-pcs'] });
     if (!features.length) {
         return;
     }
@@ -130,38 +139,40 @@ map.on('click', function (e) {
         +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la commune"+'</span>'+'</td></tr></table>'
         +'<table>'
         +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.libcom+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Code Postale"+'</td><td>'+feature.properties.cpostale+'</td></tr>'
-        +'<tr><td>'+"Département"+'</td><td>'+feature.properties.libdep+'</td></tr>'
+        +'<tr><td>'+"Code postal"+'</td><td>'+feature.properties.cpostal+'</span>'+'</td></tr>'
         +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
-        +'<tr><td>'+"Evolution Population"+'</td><td>'+feature.properties.pop_e+'</td></tr>'
+        +'<tr><td>'+"Évolution population"+'</td><td>'+feature.properties.pop_e+'</td></tr>'
         +'<tr><td>'+"Densité (Hab/Km²)"+'</td><td>'+feature.properties.densite+'</td></tr>'
-        +'<tr><td>'+"CSP Cadres"+'</td><td>'+feature.properties.popcs3+' ('+feature.properties.popcs3_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"CSP Ouvriers"+'</td><td>'+feature.properties.popcs6+' ('+feature.properties.popcs6_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"CSP Retraités"+'</td><td>'+feature.properties.popcs7+' ('+feature.properties.popcs7_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.men+'</td></tr>'
-        +'<tr><td>'+"Famille"+'</td><td>'+feature.properties.fam+'</td></tr>'
-        +'<tr><td>'+"Logement"+'</td><td>'+feature.properties.log+'</td></tr>'
-        +'<tr><td>'+"Maison"+'</td><td>'+feature.properties.maison+' ('+feature.properties.maison_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Appartement"+'</td><td>'+feature.properties.appart+' ('+feature.properties.appart_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"HLM"+'</td><td>'+feature.properties.rphlm+' ('+feature.properties.rphlm_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Chômeurs"+'</td><td>'+feature.properties.chom1564+' ('+feature.properties.chom1564_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Salaire Horaire Moy."+'</td><td>'+feature.properties.snhm+'€'+'</td></tr>'
-        +'<tr><td>'+"Supermarché"+'</td><td>'+feature.properties.super+'</td></tr>'
-        +'<tr><td>'+"Ecole Maternelle"+'</td><td>'+feature.properties.ecolemat+'</td></tr>'
-        +'<tr><td>'+"Médecin Généraliste"+'</td><td>'+feature.properties.medecing+'</td></tr>'
-        +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr></table>'
-        +'</strong>')
+        +'<tr><td>'+"Pop. 15 ans ou plus"+'</td><td>'+feature.properties.pop15p+'</td></tr>'
+        +'<tr><td>'+"Agriculteurs exploitants"+'</td><td>'+feature.properties.popcs1+' ('+feature.properties.popcs1_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Artisans, Comm., Chefs entr."+'</td><td>'+feature.properties.popcs2+' ('+feature.properties.popcs2_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Cadres, Prof. intel. sup."+'</td><td>'+feature.properties.popcs3+' ('+feature.properties.popcs3_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Prof. intermédiaires"+'</td><td>'+feature.properties.popcs4+' ('+feature.properties.popcs4_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Employés"+'</td><td>'+feature.properties.popcs5+' ('+feature.properties.popcs5_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ouvriers"+'</td><td>'+feature.properties.popcs6+' ('+feature.properties.popcs6_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Retraités"+'</td><td>'+feature.properties.popcs7+' ('+feature.properties.popcs7_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Autres"+'</td><td>'+feature.properties.popcs8+' ('+feature.properties.popcs8_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Plus d’infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr>'
+        +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");
             });
 
+
+
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-centroide','france-commune'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-pcs-centroide','france-commune-population-pcs'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl(),'top-right');
+
+map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
+
+/* map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ; */
 
 </script>
 </body>

@@ -99,7 +99,7 @@ a:link, a:visited {
 </style>
 
 <a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/logo-text-light.png" class="logo" alt="Logo visualize map"></a>
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/legende-iris-population-proportion-cadre.png" class="legend" alt="Légende de la carte"></a>
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/iris/legende-iris-population-etrangers.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
@@ -125,7 +125,7 @@ scale.setUnit('metric');
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-centroide','france-iris'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-population-centroide','france-iris-population'] });
     if (!features.length) {
         return;
     }
@@ -162,7 +162,7 @@ map.on('click', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-centroide','france-iris'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-iris-population-centroide','france-iris-population'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

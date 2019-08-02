@@ -3,7 +3,7 @@
 <head>
 <meta charset='utf-8' />
 
-<title>Logements Données Carroyées</title>
+<title>Population Données Carroyées</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
@@ -99,14 +99,14 @@ a:link, a:visited {
 </style>
 
 <a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/logo-texte-1.png" class="logo" alt="Logo visualize map"></a>
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/carreaux/legende-carreaux-logements-sociaux.png" class="legend" alt="Légende de la carte"></a>
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/carreaux/legende-carreaux-population.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
-style: 'mapbox://styles/visualizemap/cjyp5pb5l525n1cph4deew8y7', // stylesheet location
-center: [2.3513582028069493, 48.85853712681944], // paris starting position [lng, lat]
+style: 'mapbox://styles/visualizemap/cjyo5luhn45xt1cphymo29u3b', // stylesheet location
+center: [4.859171776685287, 45.73291396168358], // starting position [lng, lat]
 pitch: 40, // pitch in degrees
 zoom: 10.5, // starting zoom
 attributionControl: false
@@ -126,7 +126,7 @@ scale.setUnit('metric');
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-carreaux-logement'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-carreaux-structure-pop'] });
     if (!features.length) {
         return;
     }
@@ -141,18 +141,17 @@ map.on('click', function (e) {
         +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
         +'<table>'
         +'<tr><td>'+"Population"+'</td><td>'+feature.properties.ind+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Logements occupés"+'</td><td>'+feature.properties.logtotal+'</td></tr>'
-        +'<tr><td>'+"Ménages propriétaires"+'</td><td>'+feature.properties.men_prop+' ('+feature.properties.men_propp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages en appartement"+'</td><td>'+feature.properties.men_coll+' ('+feature.properties.men_collp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages en maison"+'</td><td>'+feature.properties.men_mais+' ('+feature.properties.men_maisp+'%)'+'</td></tr>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Logements sociaux"+'</span>'+'</td><td>'+'<span style="color:#424242;text-align:center;">'+feature.properties.log_soc+' ('+feature.properties.log_socp+'%)'+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Log. construits avant 1945"+'</td><td>'+feature.properties.log_av45+' ('+feature.properties.log_av45p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Log. construits entre 1945 et 1969"+'</td><td>'+feature.properties.log_45_70+' ('+feature.properties.log_45_70p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Log. construits entre 1970 et 1989"+'</td><td>'+feature.properties.log_70_90+' ('+feature.properties.log_70_90p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Log. construits depuis 1990"+'</td><td>'+feature.properties.log_ap90+' ('+feature.properties.log_ap90p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Log. construction inconnue"+'</td><td>'+feature.properties.log_inc+' ('+feature.properties.log_incp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Surface total des logements"+'</td><td>'+feature.properties.men_surf+'m²'+'</td></tr>'
-        +'<tr><td>'+"Surface moy. des logements"+'</td><td>'+feature.properties.men_surfm+'m²'+'</td></tr></table>'
+        +'<tr><td>'+"Pop. 0 à 3 ans"+'</td><td>'+feature.properties.ind_0_3+' ('+feature.properties.ind_0_3p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 4 à 5 ans"+'</td><td>'+feature.properties.ind_4_5+' ('+feature.properties.ind_4_5p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 6 à 10 ans"+'</td><td>'+feature.properties.ind_6_10+' ('+feature.properties.ind_6_10p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 11 à 17 ans"+'</td><td>'+feature.properties.ind_11_17+' ('+feature.properties.ind_11_17p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 18 à 24 ans"+'</td><td>'+feature.properties.ind_18_24+' ('+feature.properties.ind_18_24p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 25 à 39 ans"+'</td><td>'+feature.properties.ind_25_39+' ('+feature.properties.ind_25_39p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 40 à 54 ans"+'</td><td>'+feature.properties.ind_40_54+' ('+feature.properties.ind_40_54p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 55 à 64 ans"+'</td><td>'+feature.properties.ind_55_64+' ('+feature.properties.ind_55_64p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 65 à 79 ans"+'</td><td>'+feature.properties.ind_65_79+' ('+feature.properties.ind_65_79p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 80 ans ou plus"+'</td><td>'+feature.properties.ind_80p+' ('+feature.properties.ind_80pp+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. âge inconnu"+'</td><td>'+feature.properties.ind_inc+' ('+feature.properties.ind_incp+'%)'+'</td></tr></table>'
         +'</strong>')
         .addTo(map)
         .setMaxWidth("500px");
@@ -161,7 +160,7 @@ map.on('click', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-carreaux-logement'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['france-carreaux-structure-pop'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

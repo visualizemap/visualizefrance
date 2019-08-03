@@ -98,8 +98,6 @@ a:link, a:visited {
 }
 </style>
 
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/logo-texte-1.png" class="logo" alt="Logo visualize map"></a>
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/carreaux/legende-carreaux-population.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
@@ -111,16 +109,7 @@ pitch: 40, // pitch in degrees
 zoom: 10.5, // starting zoom
 attributionControl: false
 });
-var hoveredStateId =  null;
 
-var scale = new mapboxgl.ScaleControl({
-    maxWidth: 150,
-    unit: 'imperial',
-});
-
-map.addControl(scale,'bottom-left');
-
-scale.setUnit('metric');
 
 // When a click event occurs near a polygon, open a popup at the location of
 // the feature, with description HTML from its properties.
@@ -165,9 +154,7 @@ map.on('mousemove', function (e) {
 });
 
 // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl(),'top-right');
 
-map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
 
 /* map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ; */
 

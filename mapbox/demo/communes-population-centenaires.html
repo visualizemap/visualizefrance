@@ -113,7 +113,7 @@ attributionControl: false
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-centroide','france-commune-population'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['centenaires-centroide','centenaires'] });
     if (!features.length) {
         return;
     }
@@ -139,6 +139,7 @@ map.on('click', function (e) {
         +'<tr><td>'+"Pop. 60-74 ans"+'</td><td>'+feature.properties.pop6074+' ('+feature.properties.pop6074_p+'%)'+'</td></tr>'
         +'<tr><td>'+"Pop. 75-89 ans"+'</td><td>'+feature.properties.pop7589+' ('+feature.properties.pop7589_p+'%)'+'</td></tr>'
         +'<tr><td>'+"Pop. 90 ans ou plus"+'</td><td>'+feature.properties.pop90p+' ('+feature.properties.pop90p_p+'%)'+'</td></tr>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Pop. 100 ans ou plus "+'</span></td><td>'+'<span style="color:#424242;text-align:center;">'+feature.properties.pop100+' ('+feature.properties.pop100p+'%)'+'</span></td></tr>'
         +'<tr><td>'+"Pop. Hommes"+'</td><td>'+feature.properties.poph+' ('+feature.properties.poph_p+'%)'+'</td></tr>'
         +'<tr><td>'+"Pop. Femmes"+'</td><td>'+feature.properties.popf+' ('+feature.properties.popf_p+'%)'+'</td></tr>'
         +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr>'
@@ -152,7 +153,7 @@ map.on('click', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['france-commune-population-centroide','france-commune-population'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['centenaires-centroide','centenaires'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

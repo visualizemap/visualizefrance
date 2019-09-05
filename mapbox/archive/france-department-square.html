@@ -47,7 +47,7 @@ body { margin:0; padding:0; }
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
-style: 'mapbox://styles/visualizemap/cjx1kew8t27cf1cnw89yjtdgs', // stylesheet location
+style: 'mapbox://styles/visualizemap/cjyp5pb5l525n1cph4deew8y7', // stylesheet location
 center: [2.316141, 46.084976], // starting position [lng, lat]
 pitch: 40, // pitch in degrees
 bearing: -40, // bearing in degrees
@@ -67,16 +67,7 @@ map.on('load', function () {
 // Start the animation.
 rotateCamera(-40);
 
-// Add 3d buildings and remove label layers to enhance the map
-var layers = map.getStyle().layers;
-for (var i = 0; i < layers.length; i++) {
-if (layers[i].type === 'symbol' && layers[i].layout['settlement-label']) {
-// remove text labels
-map.removeLayer(layers[i].id);
-}
-}
 
-var hoveredStateId =  null;
 
 // When a click event occurs near a polygon, open a popup at the location of
 // the feature, with description HTML from its properties.
@@ -119,11 +110,8 @@ map.on('mousemove', function (e) {
 
 
 // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl(),'top-left');
 
-map.addControl(new mapboxgl.FullscreenControl(),'top-left');
 
-map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
 
 });
 

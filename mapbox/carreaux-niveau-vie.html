@@ -213,7 +213,7 @@ map.on('mousemove', function (e) {
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 
-map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
+map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl(),'top-right');

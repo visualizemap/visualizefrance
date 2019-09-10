@@ -98,7 +98,7 @@ a:link, a:visited {
   left: 5px !important;
   top: 7px !important;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 640px) {
   .mapboxgl-ctrl-geocoder {
     visibility: hidden;
   }
@@ -215,9 +215,10 @@ map.on('mousemove', function (e) {
 
 
 // Add zoom and rotation controls to the map.
-map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
-map.addControl(new mapboxgl.NavigationControl(),'top-right');
 map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
+map.addControl(new mapboxgl.NavigationControl(),'top-right');
+map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
+
 
 
 </script>

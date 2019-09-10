@@ -42,7 +42,7 @@ a:link, a:visited {
 </style>
 
 <style>
-        /* Mapbox GL */
+/* Mapbox GL */
 .mapboxgl-ctrl-top-right .mapboxgl-ctrl {
   margin: 12px 12px 0 0 !important;
 }
@@ -78,8 +78,6 @@ a:link, a:visited {
 .mapboxgl-ctrl-geocoder input[type='text'] {
   height: 30px;
   padding: 3px 30px;
-  font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-
 }
 .mapboxgl-ctrl-geocoder--icon {
   fill: #1f3044;
@@ -88,7 +86,6 @@ a:link, a:visited {
 .geocoder-icon-close {
   margin-top: 0;
   display: block;
-
 }
 .mapboxgl-ctrl-geocoder--icon-loading {
   background: white !important;
@@ -103,7 +100,7 @@ a:link, a:visited {
 }
 @media only screen and (max-width: 640px) {
   .mapbox-mark {
-    width: 3px;
+    width: 30px;
   }
   .infobox-action {
     display: none;
@@ -221,8 +218,6 @@ map.on('mousemove', function (e) {
 map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right') ;
 map.addControl(new mapboxgl.NavigationControl(),'top-right');
 map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
-
-
 
 
 </script>

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<meta charset='utf-8' />
-
 <title>IRIS Population</title>
+<meta charset='utf-8' />
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.0/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.0/mapbox-gl-geocoder.css' type='text/css' />
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js"></script>
 <style>
 body { margin:0; padding:0; }
 #map { position:absolute; top:0; bottom:0; width:100%;  z-index: 1; }
@@ -38,27 +37,86 @@ table, th, td {
 
 a:link, a:visited {
     color: #424242;
-
- .geocoder {
-  position:absolute;
-  z-index:3;
-  width:0%;
-  left:0%;
-  margin-left:-2%;
-  top:20px;
-  }
-
-  .mapboxgl-ctrl-geocoder {
-    min-width:100%;
-    z-index:3;
  }
+</style>
+
+<style>
+/* Mapbox GL */
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 12px 12px 0 0 !important;
+}
+.mapboxgl-ctrl-icon {
+  background-size: 18px 18px !important;
+  background-position: 6px 6px !important;
+  background-repeat: no-repeat !important;
+}
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-compass > .mapboxgl-ctrl-compass-arrow {
+  height: 18px;
+  margin: 6px;
+  width: 18px;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='yes'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='%231F3044'%0Ad='M5.5,14.2c-0.9,0.8-1.9,0-1.5-1l4-9c0.2-0.4,0.6-0.8,1-0.8s0.8,0.4,1,0.8l4,9c0.4,1-0.6,1.8-1.5,1l-3.5-3L5.5,14.2z'/%3E%3C/svg%3E");
+}
+.mapboxgl-ctrl-group {
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+}
+/* only hide the logo if title=true is true */
+.has-title .mapboxgl-ctrl-logo {
+  display: none !important;
+}
+/* Mapbox GL geocoder */
+.mapboxgl-ctrl-geocoder--collapsed {
+  height: 30px !important;
+  min-width: 30px !important;
+  width: 30px !important;
+}
+.mapboxgl-ctrl-geocoder {
+  transition: none !important;
+}
+.mapboxgl-ctrl-geocoder input[type='text'] {
+  height: 30px;
+  padding: 3px 30px;
+}
+.mapboxgl-ctrl-geocoder--icon {
+  fill: #1f3044;
+  margin-top: -3px !important;
+}
+.geocoder-icon-close {
+  margin-top: 0;
+  display: block;
+}
+.mapboxgl-ctrl-geocoder--icon-loading {
+  background: white !important;
+  border-radius: 100% !important;
+  top: 5px !important;
+  right: 6px !important;
+  pointer-events: none !important;
+}
+.mapboxgl-ctrl-geocoder--icon-search {
+  left: 5px !important;
+  top: 7px !important;
+}
+@media only screen and (max-width: 640px) {
+  .mapbox-mark {
+    width: 30px;
+  }
+  .infobox-action {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .mapboxgl-ctrl-geocoder {
+    visibility: hidden;
+  }
+  .infobox-action {
+    display: none;
+  }
+}
 </style>
 
 <div id='map'></div>
 <div id='geocoder' class='mapboxgl-ctrl-geocoder'></div>
 
 <style>
-
 
 .mapboxgl-popup {
   position:absolute;
@@ -70,7 +128,6 @@ a:link, a:visited {
     line-height: 140%;
     z-index: 3;
 }
-
 .mapboxgl-popup-close-button {
   position:absolute;
   font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -79,7 +136,6 @@ a:link, a:visited {
   color: #212121;
   z-index: 3;
 }
-
 .legend {
   position: absolute;
   right: 8px;
@@ -87,18 +143,16 @@ a:link, a:visited {
   width: 189.028px;
   z-index: 2;
 }
-
-
 .logo {
   position: absolute;
-  top: -95%; bottom: 0; left: 8px; right: 100%;
-   margin: auto;
+  left: 8px;
+  top: 8px;
   height:22px;
   z-index: 2;
 }
 </style>
 
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/logo-texte-1.png" class="logo" alt="Logo visualize map"></a>
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/logo-texte-1.png" class="logo" alt="Logo visualizemap"></a>
 <a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/iris/legende-iris-population-pcs-cadres.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
@@ -165,11 +219,9 @@ map.on('mousemove', function (e) {
 });
 
 // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.NavigationControl(),'top-right');
-
 map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
-
-/* map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,collapsed:true,mapboxgl: mapboxgl }),'top-right') ; */
+map.addControl(new mapboxgl.NavigationControl(),'top-right');
+map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,language:'fr',countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right');
 
 </script>
 </body>

@@ -199,15 +199,15 @@ map.on('click', function (e) {
         +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
         +'<tr><td>'+"Évolution pop. (2011-2016)"+'</td><td>'+feature.properties.pop_e+'%'+'</td></tr>'
         +'<tr><td>'+"Actifs occupés"+'</td><td>'+feature.properties.occ15p+'</td></tr>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Modes de transport utilisés par les actifs pour aller au travail"+'</span>'+'</td></tr>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Modes de transport utilisés "+'<br />'+"par les actifs pour aller au travail"+'</span>'+'</td></tr>'
         +'<tr><td>'+"La voiture"+'</td><td>'+feature.properties.ocvoit+' ('+feature.properties.ocvoit_p+'%)'+'</td></tr>'
         +'<tr><td>'+"Un deux roues"+'</td><td>'+feature.properties.oc2roues+' ('+feature.properties.oc2roues_p+'%)'+'</td></tr>'
         +'<tr><td>'+"Les transports en commun"+'</td><td>'+feature.properties.octransc+' ('+feature.properties.octransc_p+'%)'+'</td></tr>'
         +'<tr><td>'+"La marche"+'</td><td>'+feature.properties.ocmarche+' ('+feature.properties.ocmarche_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Aucun"+'</td><td>'+feature.properties.ocpast+' ('+feature.properties.ocpast_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Aucun mode de transport"+'</td><td>'+feature.properties.ocpast+' ('+feature.properties.ocpast_p+'%)'+'</td></tr>'
         +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Lieu de travail des actifs"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Commune de résidence"+'</td><td>'+feature.properties.octcom+' ('+feature.properties.octcom_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Autre commune"+'</td><td>'+feature.properties.octacom+' ('+feature.properties.octacom_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"La commune de résidence"+'</td><td>'+feature.properties.octcom+' ('+feature.properties.octcom_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Une autre commune"+'</td><td>'+feature.properties.octacom+' ('+feature.properties.octacom_p+'%)'+'</td></tr>'
 
         +'</table></strong>')
         .addTo(map)

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>Données Carroyées Ménages Pauvres</title>
+<meta charset='utf-8' />
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/favicon.png">
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css" rel="stylesheet" />
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js"></script>
+<style>
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%;  z-index: 1; }
+</style>
+</head>
+<body>
+
+<style type="text/css">
+html,body{
+overflow-y:hidden;
+overflow-x:hidden;
+}
+</style>
+
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 0px;
+  color: #9E9E9E;
+  max-width: 100%;
+  padding: 1px;
+}
+
+a:link, a:visited {
+    color: #424242;
+ }
+</style>
+
+<style>
+/* Mapbox GL */
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 12px 12px 0 0 !important;
+}
+.mapboxgl-ctrl-icon {
+  background-size: 18px 18px !important;
+  background-position: 6px 6px !important;
+  background-repeat: no-repeat !important;
+}
+.mapboxgl-ctrl-icon.mapboxgl-ctrl-compass > .mapboxgl-ctrl-compass-arrow {
+  height: 18px;
+  margin: 6px;
+  width: 18px;
+  background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='yes'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='%231F3044'%0Ad='M5.5,14.2c-0.9,0.8-1.9,0-1.5-1l4-9c0.2-0.4,0.6-0.8,1-0.8s0.8,0.4,1,0.8l4,9c0.4,1-0.6,1.8-1.5,1l-3.5-3L5.5,14.2z'/%3E%3C/svg%3E");
+}
+.mapboxgl-ctrl-group {
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1) !important;
+}
+/* only hide the logo if title=true is true */
+.has-title .mapboxgl-ctrl-logo {
+  display: none !important;
+}
+/* Mapbox GL geocoder */
+.mapboxgl-ctrl-geocoder--collapsed {
+  height: 30px !important;
+  min-width: 30px !important;
+  width: 30px !important;
+}
+.mapboxgl-ctrl-geocoder {
+  transition: none !important;
+}
+.mapboxgl-ctrl-geocoder input[type='text'] {
+  height: 30px;
+  padding: 3px 30px;
+}
+.mapboxgl-ctrl-geocoder--icon {
+  fill: #1f3044;
+  margin-top: -3px !important;
+}
+.geocoder-icon-close {
+  margin-top: 0;
+  display: block;
+}
+.mapboxgl-ctrl-geocoder--icon-loading {
+  background: white !important;
+  border-radius: 100% !important;
+  top: 5px !important;
+  right: 6px !important;
+  pointer-events: none !important;
+}
+.mapboxgl-ctrl-geocoder--icon-search {
+  left: 5px !important;
+  top: 7px !important;
+}
+@media only screen and (max-width: 640px) {
+  .mapbox-mark {
+    width: 30px;
+  }
+  .infobox-action {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .mapboxgl-ctrl-geocoder {
+    visibility: hidden;
+  }
+  .infobox-action {
+    display: none;
+  }
+}
+</style>
+
+<div id='map'></div>
+<div id='geocoder' class='mapboxgl-ctrl-geocoder'></div>
+
+<style>
+
+.mapboxgl-popup {
+  position:absolute;
+    max-width: 500px;
+    color: #212121;
+    font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    opacity: 0.9;
+    border-radius: 5px;
+    line-height: 140%;
+    z-index: 3;
+}
+.mapboxgl-popup-close-button {
+  position:absolute;
+  font: 12px/4px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  line-height: 140%;
+  font-weight: bold;
+  color: #212121;
+  z-index: 3;
+}
+.legend {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 189.028px;
+  z-index: 2;
+}
+.logo {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  height:22px;
+  z-index: 2;
+}
+</style>
+
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/logo-texte-2.png" class="logo" alt="Logo visualizemap"></a>
+<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/communes/legende-carreaux-menages-pauvres.png" class="legend" alt="Légende de la carte"></a>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/visualizemap/ck2g07dml02xk1cp8ld1r3nsp', // stylesheet location
+center: [2.3513582028069493, 48.85853712681944], // paris starting position [lng, lat]
+zoom: 8.5, // starting zoom
+attributionControl: false
+});
+var hoveredStateId =  null;
+
+var scale = new mapboxgl.ScaleControl({
+    maxWidth: 150,
+    unit: 'imperial',
+});
+
+map.addControl(scale,'bottom-left');
+
+scale.setUnit('metric');
+
+// When a click event occurs near a polygon, open a popup at the location of
+// the feature, with description HTML from its properties.
+
+map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['emploi-car-centroide','emploi-car'] });
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    var popup = new mapboxgl.Popup({closeButton: true})
+        .setLngLat(map.unproject(e.point))
+        .setHTML(
+        '<strong>'
+        +'<table>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la commune"+'</span>'+'</td></tr></table>'
+        +'<table>'
+        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.libcom+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Code postal"+'</td><td>'+feature.properties.cpostal+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
+        +'<tr><td>'+"Évolution pop. (2011-2016)"+'</td><td>'+feature.properties.pop_e+'%'+'</td></tr>'
+        +'<tr><td>'+"Actifs occupés"+'</td><td>'+feature.properties.occ15p+'</td></tr>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Modes de transport utilisés "+'<br />'+"par les actifs pour aller au travail"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"La voiture"+'</td><td>'+feature.properties.ocvoit+' ('+feature.properties.ocvoit_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Un deux roues"+'</td><td>'+feature.properties.oc2roues+' ('+feature.properties.oc2roues_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Les transports en commun"+'</td><td>'+feature.properties.octransc+' ('+feature.properties.octransc_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"La marche"+'</td><td>'+feature.properties.ocmarche+' ('+feature.properties.ocmarche_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Aucun mode de transport"+'</td><td>'+feature.properties.ocpast+' ('+feature.properties.ocpast_p+'%)'+'</td></tr>'
+        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Lieu de travail des actifs"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"La commune de résidence"+'</td><td>'+feature.properties.octcom+' ('+feature.properties.octcom_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Une autre commune"+'</td><td>'+feature.properties.octacom+' ('+feature.properties.octacom_p+'%)'+'</td></tr>'
+
+        +'</table></strong>')
+        .addTo(map)
+        .setMaxWidth("500px");
+            });
+
+
+
+// Use the same approach as above to indicate that the symbols are clickable
+// by changing the cursor style to 'pointer'.
+map.on('mousemove', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['emploi-car-centroide','emploi-car'] });
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+});
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
+map.addControl(new mapboxgl.NavigationControl(),'top-right');
+map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,language:'fr',countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right');
+
+</script>
+</body>
+</html>

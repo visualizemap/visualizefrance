@@ -229,11 +229,11 @@ map.on('click', 'dvfappartementspoints2018', function (e) {
         '<strong>'
         +'<table>'
         +'<tr><td>'+'<span style="color:#424242;">'+"Appartement(s)"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Numéro parcelle"+'</td><td>'+feature2.properties.id_parcelle+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre de vente(s)"+'</td><td>'+feature2.properties.a_nb_ventes+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix moyen au m²"+'</td><td>'+feature2.properties.a_prix_m2+'</span>'+"€"+'</td></tr>'
-        +'<tr><td>'+"Montant moyen des ventes"+'</td><td>'+feature2.properties.a_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie moyenne"+'</td><td>'+feature2.properties.a_surface_moyenne+"m²"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Numéro parcelle"+'</td><td style="text-align:right">'+feature2.properties.id_parcelle+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Nombre de vente(s)"+'</td><td style="text-align:right">'+feature2.properties.a_nb_ventes+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature2.properties.a_prix_m2+'</span>'+"€"+'</td></tr>'
+        +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature2.properties.a_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature2.properties.a_surface_moyenne+"m²"+'</span>'+'</td></tr>'
         +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");
@@ -254,11 +254,11 @@ map.on('click', 'dvfmaisonspoints2018', function (e) {
         '<strong>'
         +'<table>'
         +'<tr><td>'+'<span style="color:#424242;">'+"Maison(s)"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Numéro parcelle"+'</td><td>'+feature3.properties.id_parcelle+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre de vente(s)"+'</td><td>'+feature3.properties.m_nb_ventes+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix moyen au m²"+'</td><td>'+feature3.properties.m_prix_m2+'</span>'+"€"+'</td></tr>'
-        +'<tr><td>'+"Montant moyen des ventes"+'</td><td>'+feature3.properties.m_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie moyenne"+'</td><td>'+feature3.properties.m_surface_moyenne+"m²"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Numéro parcelle"+'</td><td style="text-align:right">'+feature3.properties.id_parcelle+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Nombre de vente(s)"+'</td><td style="text-align:right">'+feature3.properties.m_nb_ventes+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature3.properties.m_prix_m2+'</span>'+"€"+'</td></tr>'
+        +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature3.properties.m_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature3.properties.m_surface_moyenne+"m²"+'</span>'+'</td></tr>'
         +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");

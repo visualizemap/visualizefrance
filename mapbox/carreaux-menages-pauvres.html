@@ -33,6 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
+  min-width:65px;
   padding: 1px;
 }
 
@@ -192,12 +193,12 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.ind+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.men+'</td></tr>'
-        +'<tr><td>'+"Ménages pauvres"+'</td><td>'+feature.properties.men_pauv+'</td></tr>'
-        +'<tr><td>'+"Part ménages pauvres"+' '+'</td><td>'+feature.properties.men_pauvp+'%'+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td style="text-align:right">'+feature.properties.ind+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Ménages"+'</td><td style="text-align:right">'+feature.properties.men+'</td></tr>'
+        +'<tr><td>'+"Ménages pauvres"+'</td><td style="text-align:right">'+feature.properties.men_pauv+'</td></tr>'
+        +'<tr><td>'+"Part ménages pauvres"+' '+'</td><td style="text-align:right">'+feature.properties.men_pauvp+'%'+'</td></tr>'
 
         +'</table></strong>')
         .addTo(map)

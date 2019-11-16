@@ -33,6 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
+  min-width:65px;
   padding: 1px;
 }
 
@@ -192,25 +193,25 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la commune"+'</span>'+'</td></tr></table>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Informations sur la commune"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.libcom+'</td></tr>'
-        +'<tr><td>'+"Code postal"+'</td><td>'+feature.properties.cpostal+'</td></tr>'
-        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
-        +'<tr><td>'+"Logements"+'</td><td>'+feature.properties.log+'</td></tr>'
-        +'<tr><td>'+"Évolution logements"+'</td><td>'+feature.properties.log_e+'%'+'</td></tr>'
-        +'<tr><td>'+"Résidences principales"+'</td><td>'+feature.properties.rp+'</td></tr>'
-        +'<tr><td>'+"Rp. 1 pièce"+'</td><td>'+feature.properties.rp1p+' ('+feature.properties.rp1p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 2 pièces"+'</td><td>'+feature.properties.rp2p+' ('+feature.properties.rp2p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 3 pièces"+'</td><td>'+feature.properties.rp3p+' ('+feature.properties.rp3p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 4 pièces"+'</td><td>'+feature.properties.rp4p+' ('+feature.properties.rp4p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 5 pièces"+'</td><td>'+feature.properties.rp5pp+' ('+feature.properties.rp5pp_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. type maison"+'</td><td>'+feature.properties.rpmaison+' ('+feature.properties.rpmaison_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. type appartement"+'</td><td>'+feature.properties.rpappart+' ('+feature.properties.rpappart_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. occupées propriétaires"+'</td><td>'+feature.properties.rpprop+' ('+feature.properties.rpprop_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. occupées locataires"+'</td><td>'+feature.properties.rploc+' ('+feature.properties.rploc_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. HLM"+'</td><td>'+feature.properties.rphlm+' ('+feature.properties.rphlm_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages avec au moins une voiture"+'</td><td>'+feature.properties.rpvoit1p+' ('+feature.properties.rpvoit1p_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Commune"+'</td><td style="text-align:right">'+feature.properties.libcom+'</td></tr>'
+        +'<tr><td>'+"Code postal"+'</td><td style="text-align:right">'+feature.properties.cpostal+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td style="text-align:right">'+feature.properties.pop+'</td></tr>'
+        +'<tr><td>'+"Logements"+'</td><td style="text-align:right">'+feature.properties.log+'</td></tr>'
+        +'<tr><td>'+"Évolution logements"+'</td><td style="text-align:right">'+feature.properties.log_e+'%'+'</td></tr>'
+        +'<tr><td>'+"Résidences principales"+'</td><td style="text-align:right">'+feature.properties.rp+'</td></tr>'
+        +'<tr><td>'+"Rp. 1 pièce"+'</td><td style="text-align:right">'+feature.properties.rp1p+' ('+feature.properties.rp1p_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 2 pièces"+'</td><td style="text-align:right">'+feature.properties.rp2p+' ('+feature.properties.rp2p_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 3 pièces"+'</td><td style="text-align:right">'+feature.properties.rp3p+' ('+feature.properties.rp3p_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 4 pièces"+'</td><td style="text-align:right">'+feature.properties.rp4p+' ('+feature.properties.rp4p_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 5 pièces"+'</td><td style="text-align:right">'+feature.properties.rp5pp+' ('+feature.properties.rp5pp_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. type maison"+'</td><td style="text-align:right">'+feature.properties.rpmaison+' ('+feature.properties.rpmaison_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. type appartement"+'</td><td style="text-align:right">'+feature.properties.rpappart+' ('+feature.properties.rpappart_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. occupées propriétaires"+'</td><td style="text-align:right">'+feature.properties.rpprop+' ('+feature.properties.rpprop_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. occupées locataires"+'</td><td style="text-align:right">'+feature.properties.rploc+' ('+feature.properties.rploc_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. HLM"+'</td><td style="text-align:right">'+feature.properties.rphlm+' ('+feature.properties.rphlm_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ménages avec au moins une voiture"+'</td><td style="text-align:right">'+feature.properties.rpvoit1p+' ('+feature.properties.rpvoit1p_p+'%)'+'</td></tr>'
         +'<tr><td>'+"Plus d'infos"+'</td><td>'+'<a href="' + "https://www.insee.fr/fr/statistiques/2011101?geo=COM-"+feature.properties.com+ '"target="_blank">' + 'Insee ' +feature.properties.libcom+ '</a>'+'</td></tr>'
         +'</table></strong>')
         .addTo(map)

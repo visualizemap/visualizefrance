@@ -33,6 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
+  min-width:65px;
   padding: 1px;
 }
 
@@ -192,21 +193,21 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur l'IRIS"+'</span>'+'</td></tr></table>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Informations sur l'IRIS"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"IRIS"+'</td><td>'+feature.properties.libiris+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Code"+'</td><td>'+feature.properties.iris+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.libcom+'</td></tr>'
-        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
-        +'<tr><td>'+"Pop. 15 ans ou plus"+'</td><td>'+feature.properties.pop15p+'</td></tr>'
-        +'<tr><td>'+"Agriculteurs exploitants"+'</td><td>'+feature.properties.popcs1+' ('+feature.properties.popcs1_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Artisans, Comm., Chefs entr."+'</td><td>'+feature.properties.popcs2+' ('+feature.properties.popcs2_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Cadres, Prof. intel. sup."+'</td><td>'+feature.properties.popcs3+' ('+feature.properties.popcs3_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Prof. intermédiaires"+'</td><td>'+feature.properties.popcs4+' ('+feature.properties.popcs4_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Employés"+'</td><td>'+feature.properties.popcs5+' ('+feature.properties.popcs5_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ouvriers"+'</td><td>'+feature.properties.popcs6+' ('+feature.properties.popcs6_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Retraités"+'</td><td>'+feature.properties.popcs7+' ('+feature.properties.popcs7_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Autres"+'</td><td>'+feature.properties.popcs8+' ('+feature.properties.popcs8_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"IRIS"+'</td><td style="text-align:right">'+feature.properties.libiris+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Code"+'</td><td style="text-align:right">'+feature.properties.iris+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Commune"+'</td><td style="text-align:right">'+feature.properties.libcom+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td style="text-align:right">'+feature.properties.pop+'</td></tr>'
+        +'<tr><td>'+"Pop. 15 ans ou plus"+'</td><td style="text-align:right">'+feature.properties.pop15p+'</td></tr>'
+        +'<tr><td>'+"Agriculteurs exploitants"+'</td><td style="text-align:right">'+feature.properties.popcs1+' ('+feature.properties.popcs1_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Artisans, Comm., Chefs entr."+'</td><td style="text-align:right">'+feature.properties.popcs2+' ('+feature.properties.popcs2_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Cadres, Prof. intel. sup."+'</td><td style="text-align:right">'+feature.properties.popcs3+' ('+feature.properties.popcs3_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Prof. intermédiaires"+'</td><td style="text-align:right">'+feature.properties.popcs4+' ('+feature.properties.popcs4_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Employés"+'</td><td style="text-align:right">'+feature.properties.popcs5+' ('+feature.properties.popcs5_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ouvriers"+'</td><td style="text-align:right">'+feature.properties.popcs6+' ('+feature.properties.popcs6_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Retraités"+'</td><td style="text-align:right">'+feature.properties.popcs7+' ('+feature.properties.popcs7_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Autres"+'</td><td style="text-align:right">'+feature.properties.popcs8+' ('+feature.properties.popcs8_p+'%)'+'</td></tr>'
         +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");

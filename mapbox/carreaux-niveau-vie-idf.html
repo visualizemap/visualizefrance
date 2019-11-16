@@ -33,6 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
+  min-width:65px;
   padding: 1px;
 }
 
@@ -193,15 +194,15 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.ind+'</span>'+'</td></tr>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Niveau de vie"+'</span></td><td>'+'<span style="color:#424242;text-align:center;">'+feature.properties.niv_vie+'€'+'</span></td></tr>'
-        +'<tr><td>'+"Ménages"+'</td><td>'+feature.properties.men+'</td></tr>'
-        +'<tr><td>'+"Ménages pauvres"+'</td><td>'+feature.properties.men_pauv+' ('+feature.properties.men_pauvp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages d’un seul individu"+'</td><td>'+feature.properties.men_1ind+' ('+feature.properties.men_1indp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages de 5 individus ou plus"+'</td><td>'+feature.properties.men_5ind+' ('+feature.properties.men_5indp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Ménages monoparentaux"+'</td><td>'+feature.properties.men_fmp+' ('+feature.properties.men_fmpp+'%)'+'</td></tr></table>'
+        +'<tr><td>'+"Population"+'</td><td style="text-align:right">'+feature.properties.ind+'</span>'+'</td></tr>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Niveau de vie"+'</span></td><td style="text-align:right">'+'<span style="color:#424242;">'+feature.properties.niv_vie+'€'+'</span></td></tr>'
+        +'<tr><td>'+"Ménages"+'</td><td style="text-align:right">'+feature.properties.men+'</td></tr>'
+        +'<tr><td>'+"Ménages pauvres"+'</td><td style="text-align:right">'+feature.properties.men_pauv+' ('+feature.properties.men_pauvp+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ménages d’un seul individu"+'</td><td style="text-align:right">'+feature.properties.men_1ind+' ('+feature.properties.men_1indp+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ménages de 5 individus ou plus"+'</td><td style="text-align:right">'+feature.properties.men_5ind+' ('+feature.properties.men_5indp+'%)'+'</td></tr>'
+        +'<tr><td>'+"Ménages monoparentaux"+'</td><td style="text-align:right">'+feature.properties.men_fmp+' ('+feature.properties.men_fmpp+'%)'+'</td></tr></table>'
         +'</strong>')
         .addTo(map)
         .setMaxWidth("500px");

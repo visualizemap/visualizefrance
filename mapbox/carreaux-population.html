@@ -33,6 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
+  min-width:65px;
   padding: 1px;
 }
 
@@ -193,20 +194,20 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Informations sur la zone"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.ind+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Pop. 0 à 3 ans"+'</td><td>'+feature.properties.ind_0_3+' ('+feature.properties.ind_0_3p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 4 à 5 ans"+'</td><td>'+feature.properties.ind_4_5+' ('+feature.properties.ind_4_5p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 6 à 10 ans"+'</td><td>'+feature.properties.ind_6_10+' ('+feature.properties.ind_6_10p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 11 à 17 ans"+'</td><td>'+feature.properties.ind_11_17+' ('+feature.properties.ind_11_17p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 18 à 24 ans"+'</td><td>'+feature.properties.ind_18_24+' ('+feature.properties.ind_18_24p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 25 à 39 ans"+'</td><td>'+feature.properties.ind_25_39+' ('+feature.properties.ind_25_39p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 40 à 54 ans"+'</td><td>'+feature.properties.ind_40_54+' ('+feature.properties.ind_40_54p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 55 à 64 ans"+'</td><td>'+feature.properties.ind_55_64+' ('+feature.properties.ind_55_64p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 65 à 79 ans"+'</td><td>'+feature.properties.ind_65_79+' ('+feature.properties.ind_65_79p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. 80 ans ou plus"+'</td><td>'+feature.properties.ind_80p+' ('+feature.properties.ind_80pp+'%)'+'</td></tr>'
-        +'<tr><td>'+"Pop. âge inconnu"+'</td><td>'+feature.properties.ind_inc+' ('+feature.properties.ind_incp+'%)'+'</td></tr></table>'
+        +'<tr><td>'+"Population"+'</td><td style="text-align:right">'+feature.properties.ind+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Pop. 0 à 3 ans"+'</td><td style="text-align:right">'+feature.properties.ind_0_3+' ('+feature.properties.ind_0_3p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 4 à 5 ans"+'</td><td style="text-align:right">'+feature.properties.ind_4_5+' ('+feature.properties.ind_4_5p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 6 à 10 ans"+'</td><td style="text-align:right">'+feature.properties.ind_6_10+' ('+feature.properties.ind_6_10p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 11 à 17 ans"+'</td><td style="text-align:right">'+feature.properties.ind_11_17+' ('+feature.properties.ind_11_17p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 18 à 24 ans"+'</td><td style="text-align:right">'+feature.properties.ind_18_24+' ('+feature.properties.ind_18_24p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 25 à 39 ans"+'</td><td style="text-align:right">'+feature.properties.ind_25_39+' ('+feature.properties.ind_25_39p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 40 à 54 ans"+'</td><td style="text-align:right">'+feature.properties.ind_40_54+' ('+feature.properties.ind_40_54p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 55 à 64 ans"+'</td><td style="text-align:right">'+feature.properties.ind_55_64+' ('+feature.properties.ind_55_64p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 65 à 79 ans"+'</td><td style="text-align:right">'+feature.properties.ind_65_79+' ('+feature.properties.ind_65_79p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. 80 ans ou plus"+'</td><td style="text-align:right">'+feature.properties.ind_80p+' ('+feature.properties.ind_80pp+'%)'+'</td></tr>'
+        +'<tr><td>'+"Pop. âge inconnu"+'</td><td style="text-align:right">'+feature.properties.ind_inc+' ('+feature.properties.ind_incp+'%)'+'</td></tr></table>'
         +'</strong>')
         .addTo(map)
         .setMaxWidth("500px");

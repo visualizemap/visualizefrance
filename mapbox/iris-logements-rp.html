@@ -33,6 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
+  min-width:65px;
   padding: 1px;
 }
 
@@ -192,26 +193,26 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur l'IRIS"+'</span>'+'</td></tr></table>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Informations sur l'IRIS"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"IRIS"+'</td><td>'+feature.properties.libiris+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Code"+'</td><td>'+feature.properties.iris+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Commune"+'</td><td>'+feature.properties.libcom+'</td></tr>'
-        +'<tr><td>'+"Population"+'</td><td>'+feature.properties.pop+'</td></tr>'
-        +'<tr><td>'+"Logements"+'</td><td>'+feature.properties.log+'</td></tr>'
-        +'<tr><td>'+"Résidences principales"+'</td><td>'+feature.properties.rp+'</td></tr>'
-        +'<tr><td>'+"Rp. type maison"+'</td><td>'+feature.properties.rpmaison+' ('+feature.properties.rpmaison_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. type appartement"+'</td><td>'+feature.properties.rpappart+' ('+feature.properties.rpappart_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. moins de 30m²"+'</td><td>'+feature.properties.rpm30+' ('+feature.properties.rpm30_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 30-40 m²"+'</td><td>'+feature.properties.rp3040+' ('+feature.properties.rp3040_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 40-60 m²"+'</td><td>'+feature.properties.rp4060+' ('+feature.properties.rp4060_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 60-80 m²"+'</td><td>'+feature.properties.rp6080+' ('+feature.properties.rp6080_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 80-100 m²"+'</td><td>'+feature.properties.rp80100+' ('+feature.properties.rp80100_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 100-120 m²"+'</td><td>'+feature.properties.rp100120+' ('+feature.properties.rp100120_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. 120 m² ou plus"+'</td><td>'+feature.properties.rp120m2p+' ('+feature.properties.rp120m2p_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. occupées propriétaires"+'</td><td>'+feature.properties.rpprop+' ('+feature.properties.rpprop_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. occupées locataires"+'</td><td>'+feature.properties.rploc+' ('+feature.properties.rploc_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Rp. HLM"+'</td><td>'+feature.properties.rphlm+' ('+feature.properties.rphlm_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"IRIS"+'</td><td style="text-align:right">'+feature.properties.libiris+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Code"+'</td><td style="text-align:right">'+feature.properties.iris+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Commune"+'</td><td style="text-align:right">'+feature.properties.libcom+'</td></tr>'
+        +'<tr><td>'+"Population"+'</td><td style="text-align:right">'+feature.properties.pop+'</td></tr>'
+        +'<tr><td>'+"Logements"+'</td><td style="text-align:right">'+feature.properties.log+'</td></tr>'
+        +'<tr><td>'+"Résidences principales"+'</td><td style="text-align:right">'+feature.properties.rp+'</td></tr>'
+        +'<tr><td>'+"Rp. type maison"+'</td><td style="text-align:right">'+feature.properties.rpmaison+' ('+feature.properties.rpmaison_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. type appartement"+'</td><td style="text-align:right">'+feature.properties.rpappart+' ('+feature.properties.rpappart_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. moins de 30m²"+'</td><td style="text-align:right">'+feature.properties.rpm30+' ('+feature.properties.rpm30_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 30-40 m²"+'</td><td style="text-align:right">'+feature.properties.rp3040+' ('+feature.properties.rp3040_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 40-60 m²"+'</td><td style="text-align:right">'+feature.properties.rp4060+' ('+feature.properties.rp4060_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 60-80 m²"+'</td><td style="text-align:right">'+feature.properties.rp6080+' ('+feature.properties.rp6080_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 80-100 m²"+'</td><td style="text-align:right">'+feature.properties.rp80100+' ('+feature.properties.rp80100_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 100-120 m²"+'</td><td style="text-align:right">'+feature.properties.rp100120+' ('+feature.properties.rp100120_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. 120 m² ou plus"+'</td><td style="text-align:right">'+feature.properties.rp120m2p+' ('+feature.properties.rp120m2p_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. occupées propriétaires"+'</td><td style="text-align:right">'+feature.properties.rpprop+' ('+feature.properties.rpprop_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. occupées locataires"+'</td><td style="text-align:right">'+feature.properties.rploc+' ('+feature.properties.rploc_p+'%)'+'</td></tr>'
+        +'<tr><td>'+"Rp. HLM"+'</td><td style="text-align:right">'+feature.properties.rphlm+' ('+feature.properties.rphlm_p+'%)'+'</td></tr>'
         +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");

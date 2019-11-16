@@ -33,6 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
+  min-width:65px;
   padding: 1px;
 }
 
@@ -192,11 +193,11 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;text-align:center;">'+"Informations sur la mobilité professionnelle"+'</span>'+'</td></tr></table>'
+        +'<tr><td>'+'<span style="color:#424242;">'+"Informations sur la mobilité professionnelle"+'</span>'+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+"Flux de mobilité"+'</td><td>'+feature.properties.flux+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Distance à vol d’oiseau"+'</td><td>'+feature.properties.distance+'km'+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre d’actifs concernés"+'</td><td>'+feature.properties.nbflux+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Flux de mobilité"+'</td><td style="text-align:right">'+feature.properties.flux+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Distance à vol d’oiseau"+'</td><td style="text-align:right">'+feature.properties.distance+'km'+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Nombre d’actifs concernés"+'</td><td style="text-align:right">'+feature.properties.nbflux+'</span>'+'</td></tr>'
 
 
         +'</table></strong>')

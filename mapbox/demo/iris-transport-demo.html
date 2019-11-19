@@ -154,8 +154,6 @@ a:link, a:visited {
 }
 </style>
 
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/logo-texte-2.png" class="logo" alt="Logo visualizemap"></a>
-<a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/iris/legende-iris-transport.png" class="legend" alt="Légende de la carte"></a>
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
@@ -166,16 +164,7 @@ center: [2.3513582028069493, 48.85853712681944], // paris starting position [lng
 zoom: 8.5, // starting zoom
 attributionControl: false
 });
-var hoveredStateId =  null;
 
-var scale = new mapboxgl.ScaleControl({
-    maxWidth: 150,
-    unit: 'imperial',
-});
-
-map.addControl(scale,'bottom-left');
-
-scale.setUnit('metric');
 
 // When a click event occurs near a polygon, open a popup at the location of
 // the feature, with description HTML from its properties.
@@ -193,7 +182,7 @@ map.on('click', function (e) {
         .setHTML(
         '<strong>'
         +'<table>'
-        +'<tr><td>'+"Actifs occupés"+'</td><td style="text-align:right">'+feature.properties.occ15p2+'</td></tr>'
+        +'<tr><td>'+"Actifs occupés"+'</td><td style="text-align:right">'+feature.properties.occ15p+'</td></tr>'
         +'<tr><td>'+'<span style="color:#424242;">'+"Modes de transport utilisés "+'</span>'+'</td></tr>'
         +'<tr><td>'+"Les transports en commun"+'</td><td style="text-align:right">'+feature.properties.octransc+' ('+feature.properties.octransc_p+'%)'+'</td></tr>'
         +'<tr><td>'+"La voiture"+'</td><td style="text-align:right">'+feature.properties.ocvoit+' ('+feature.properties.ocvoit_p+'%)'+'</td></tr>'
@@ -215,10 +204,6 @@ map.on('mousemove', function (e) {
 });
 
 // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
-map.addControl(new mapboxgl.NavigationControl(),'top-right');
-map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,language:'fr',countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right');
-
 </script>
 </body>
 </html>

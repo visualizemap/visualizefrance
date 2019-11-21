@@ -33,7 +33,7 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
-  min-width:65px;
+  min-width:45px;
   padding: 1px;
 }
 
@@ -153,6 +153,40 @@ a:link, a:visited {
   height:22px;
   z-index: 2;
 }
+.cellule-titre-gauche {
+ text-align:left;
+ color:#424242;
+ font-weight: bold;
+
+}
+.cellule-titre-droite {
+  text-align:right;
+  color:#424242;
+  font-weight: bold;
+
+}
+.cellule-gauche {
+  text-align:left;
+
+}
+.cellule-droite {
+  text-align:right;
+}
+.popup-titre {
+  text-align:center;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1px;
+}
+
+.popup-titre-2 {
+  text-align:center;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1px;
+
+}
+
 </style>
 
 <a href="https://visualizemap.com/" target="_blank"><img src="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/logo-texte-2.png" class="logo" alt="Logo visualizemap"></a>
@@ -162,7 +196,7 @@ a:link, a:visited {
 mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
-style: 'mapbox://styles/visualizemap/ck35wz3dx1k4z1culfypeuj3g', // stylesheet location
+style: 'mapbox://styles/visualizemap/ck38p8pgo05f41clryailny7i', // stylesheet location
 center: [2.3513582028069493, 48.85853712681944], // paris starting position [lng, lat]
 zoom: 8.5, // starting zoom
 attributionControl: false
@@ -182,7 +216,7 @@ scale.setUnit('metric');
 // the feature, with description HTML from its properties.
 
 map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['iris-emploi-car-2016-centroide','iris-emploi-car-2016'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['communes-emploi-car-2016-cent-dbddjc'] });
     if (!features.length) {
         return;
     }
@@ -192,17 +226,21 @@ map.on('click', function (e) {
     var popup = new mapboxgl.Popup({closeButton: true})
         .setLngLat(map.unproject(e.point))
         .setHTML(
-        '<strong>'
+        '<p class="popup-titre">'+feature.properties.libcom+'</p>'
+        +'<td>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;">'+"Modes de transport utilisés "+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Les transports en commun"+'</td><td style="text-align:right">'+feature.properties.octransc+' ('+feature.properties.octransc_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"La voiture"+'</td><td style="text-align:right">'+feature.properties.ocvoit+' ('+feature.properties.ocvoit_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Un deux roues"+'</td><td style="text-align:right">'+feature.properties.oc2roues+' ('+feature.properties.oc2roues_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"La marche"+'</td><td style="text-align:right">'+feature.properties.ocmarche+' ('+feature.properties.ocmarche_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Aucun mode de transport"+'</td><td style="text-align:right">'+feature.properties.ocpast+' ('+feature.properties.ocpast_p+'%)'+'</td></tr>'
-        +'<tr><td>'+"Total actifs occupés"+'</td><td style="text-align:right">'+feature.properties.occ15p2+'</td></tr>'
-
-        +'</table></strong>')
+        +'<tr><th class="cellule-titre-gauche">'+"Modes de transport"+'</th>'
+        +'<th class="cellule-titre-droite">'+"Actifs"+'</th>'
+        +'<th class="cellule-titre-droite">'+"Part"+'</th>'
+        +'<th class="cellule-titre-droite">'+"Evol."+'</th>'
+        +'<th class="cellule-titre-droite">'+"Point"+'</th>'+'</tr>'
+        +'<tr><td class="cellule-gauche">'+"Les transports en commun"+'</td><td class="cellule-droite">'+feature.properties.octransc+'</td><td class="cellule-droite">'+feature.properties.octransc_p+'%'+'</td><td class="cellule-droite">'+feature.properties.octransc_e+'%'+'</td><td class="cellule-droite">'+feature.properties.octransc_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"La voiture"+'</td><td class="cellule-droite">'+feature.properties.ocvoit+'</td><td class="cellule-droite">'+feature.properties.ocvoit_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocvoit_e+'%'+'</td><td class="cellule-droite">'+feature.properties.ocvoit_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"Un deux roues"+'</td><td class="cellule-droite">'+feature.properties.oc2roues+'</td><td class="cellule-droite">'+feature.properties.oc2roues_p+'%'+'</td><td class="cellule-droite">'+feature.properties.oc2roues_e+'%'+'</td><td class="cellule-droite">'+feature.properties.oc2roues_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"La marche"+'</td><td class="cellule-droite">'+feature.properties.ocmarche+'</td><td class="cellule-droite">'+feature.properties.ocmarche_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocmarche_e+'%'+'</td><td class="cellule-droite">'+feature.properties.ocmarche_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"Aucun mode de transport"+'</td><td class="cellule-droite">'+feature.properties.ocpast+'</td><td class="cellule-droite">'+feature.properties.ocpast_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocpast_e+'%'+'</td><td class="cellule-droite">'+feature.properties.ocpast_d+'</td>'
+        +'<tr><td class="cellule-titre-gauche";">'+"Total actifs occupés"+'</td><td class="cellule-titre-droite">'+feature.properties.occ15p+'</td><td class="cellule-titre-droite">'+'100%'+'</td><td class="cellule-titre-droite">'+feature.properties.occ15p_e+'%'+'</td><td class="cellule-titre-droite">'+'0'+'</td></tr>'
+        +'</table>')
         .addTo(map)
         .setMaxWidth("500px");
             });
@@ -212,7 +250,7 @@ map.on('click', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['iris-emploi-car-2016-centroide','iris-emploi-car-2016'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['communes-emploi-car-2016-cent-dbddjc'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

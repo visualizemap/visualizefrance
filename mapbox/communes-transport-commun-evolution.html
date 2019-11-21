@@ -212,6 +212,13 @@ map.addControl(scale,'bottom-left');
 
 scale.setUnit('metric');
 
+map.on('load', function() {
+  map.setLayoutProperty('communes-emploi-car-2016-cent-trans', 'visibility', 'visible');
+  map.setLayoutProperty('communes-emploi-car-2016-cent-dbddjc', 'visibility', 'none');
+
+
+});
+
 // When a click event occurs near a polygon, open a popup at the location of
 // the feature, with description HTML from its properties.
 

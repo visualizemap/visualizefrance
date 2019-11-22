@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<title>Utilisation des transports en commun</title>
+<title>Usage de la voiture</title>
 <meta charset='utf-8' />
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/favicon.png">
@@ -231,15 +231,15 @@ map.on('click', function (e) {
         +'<table>'
         +'<tr><th class="cellule-titre-gauche">'+"Modes de transport"+'</th>'
         +'<th class="cellule-titre-droite">'+"Actifs"+'</th>'
-        +'<th class="cellule-titre-droite">'+"Part"+'</th>'
-        +'<th class="cellule-titre-droite">'+"Evol."+'</th>'
+        +'<th class="cellule-titre-droite">'+"2011"+'</th>'
+        +'<th class="cellule-titre-droite">'+"2016"+'</th>'
         +'<th class="cellule-titre-droite">'+"Ecart"+'</th>'+'</tr>'
-        +'<tr><td class="cellule-gauche">'+"Les transports en commun"+'</td><td class="cellule-droite">'+feature.properties.octransc+'</td><td class="cellule-droite">'+feature.properties.octransc_p+'%'+'</td><td class="cellule-droite">'+feature.properties.octransc_e+'%'+'</td><td class="cellule-droite">'+feature.properties.octransc_d+'</td>'
-        +'<tr><td class="cellule-gauche">'+"La voiture"+'</td><td class="cellule-droite">'+feature.properties.ocvoit+'</td><td class="cellule-droite">'+feature.properties.ocvoit_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocvoit_e+'%'+'</td><td class="cellule-droite">'+feature.properties.ocvoit_d+'</td>'
-        +'<tr><td class="cellule-gauche">'+"Un deux roues"+'</td><td class="cellule-droite">'+feature.properties.oc2roues+'</td><td class="cellule-droite">'+feature.properties.oc2roues_p+'%'+'</td><td class="cellule-droite">'+feature.properties.oc2roues_e+'%'+'</td><td class="cellule-droite">'+feature.properties.oc2roues_d+'</td>'
-        +'<tr><td class="cellule-gauche">'+"La marche"+'</td><td class="cellule-droite">'+feature.properties.ocmarche+'</td><td class="cellule-droite">'+feature.properties.ocmarche_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocmarche_e+'%'+'</td><td class="cellule-droite">'+feature.properties.ocmarche_d+'</td>'
-        +'<tr><td class="cellule-gauche">'+"Aucun mode de transport"+'</td><td class="cellule-droite">'+feature.properties.ocpast+'</td><td class="cellule-droite">'+feature.properties.ocpast_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocpast_e+'%'+'</td><td class="cellule-droite">'+feature.properties.ocpast_d+'</td>'
-        +'<tr><td class="cellule-titre-gauche";">'+"Total actifs occupés"+'</td><td class="cellule-titre-droite">'+feature.properties.occ15p+'</td><td class="cellule-titre-droite">'+'100%'+'</td><td class="cellule-titre-droite">'+feature.properties.occ15p_e+'%'+'</td><td class="cellule-titre-droite">'+'0'+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Transports en commun"+'</td><td class="cellule-droite">'+feature.properties.octransc+'</td><td class="cellule-droite">'+feature.properties.octransc_q+'%'+'</td><td class="cellule-droite">'+feature.properties.octransc_p+'%'+'</td><td class="cellule-droite">'+feature.properties.octransc_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"La voiture"+'</td><td class="cellule-droite">'+feature.properties.ocvoit+'</td><td class="cellule-droite">'+feature.properties.ocvoit_q+'%'+'</td><td class="cellule-droite">'+feature.properties.ocvoit_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocvoit_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"Un deux roues"+'</td><td class="cellule-droite">'+feature.properties.oc2roues+'</td><td class="cellule-droite">'+feature.properties.oc2roues_q+'%'+'</td><td class="cellule-droite">'+feature.properties.oc2roues_p+'%'+'</td><td class="cellule-droite">'+feature.properties.oc2roues_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"La marche"+'</td><td class="cellule-droite">'+feature.properties.ocmarche+'</td><td class="cellule-droite">'+feature.properties.ocmarche_q+'%'+'</td><td class="cellule-droite">'+feature.properties.ocmarche_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocmarche_d+'</td>'
+        +'<tr><td class="cellule-gauche">'+"Aucun mode"+'</td><td class="cellule-droite">'+feature.properties.ocpast+'</td><td class="cellule-droite">'+feature.properties.ocpast_q+'%'+'</td><td class="cellule-droite">'+feature.properties.ocpast_p+'%'+'</td><td class="cellule-droite">'+feature.properties.ocpast_d+'</td>'
+        +'<tr><td class="cellule-titre-gauche";">'+"Total actifs occupés"+'</td><td class="cellule-titre-droite">'+feature.properties.occ15p+'</td><td class="cellule-titre-droite">'+'100%'+'</td><td class="cellule-titre-droite">'+'100%'+'</td><td class="cellule-titre-droite">'+'0'+'</td></tr>'
         +'</table>')
         .addTo(map)
         .setMaxWidth("500px");

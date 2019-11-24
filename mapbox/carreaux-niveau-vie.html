@@ -216,7 +216,7 @@ map.on('mousemove', function (e) {
 });
 
 // Add zoom and rotation controls to the map.
-map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('body')}),'top-right');
+map.addControl(new mapboxgl.FullscreenControl({container: document.querySelector('html')}),'top-right');
 map.addControl(new mapboxgl.NavigationControl(),'top-right');
 map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,zoom:12,language:'fr',countries: 'fr',collapsed:true,mapboxgl: mapboxgl }),'top-right');
 

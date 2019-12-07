@@ -33,8 +33,8 @@ table, th, td {
   border: 0px;
   color: #9E9E9E;
   max-width: 100%;
-  min-width:65px;
-  padding: 1px;
+  min-width:100px;
+  padding: 1.5px;
 }
 
 a:link, a:visited {
@@ -178,16 +178,18 @@ a:link, a:visited {
 .popup-titre {
   text-align:center;
   color:#424242;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  line-height: 0px;
+  line-height: 100%;
+
 }
 
 .popup-titre-2 {
   text-align:center;
-  font-size: 13px;
+  color:#424242;
+  font-size: 14px;
   font-weight: bold;
-  line-height: 1px;
+  line-height: 100%;
 
 }
 </style>
@@ -229,26 +231,26 @@ map.on('click', 'dvfcommunes2018', function (e) {
     var popup = new mapboxgl.Popup({closeButton: true})
         .setLngLat(map.unproject(e.point))
         .setHTML(
-        '<strong>'
-        +'<p class="popup-titre">'+feature.properties.libcom+'</p>'
-        +'<p class="popup-titre">'+feature.properties.cpostal+'</p>'
+        '<table>'
+        +'<tr><td class="popup-titre">'+feature.properties.libcom+'</td></tr>'
+        +'<tr><td class="popup-titre-2">'+feature.properties.cpostal+'</td></tr></table>'
         +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;">'+"Maisons"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre de ventes"+'</td><td style="text-align:right">'+feature.properties.m_nb_ventes+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature.properties.m_prix_m2+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature.properties.m_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature.properties.m_surface_moyenne+"m²"+'</span>'+'</td></tr>'
-        +'<tr><td>'+'<span style="color:#424242;">'+"Appartements"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre de ventes"+'</td><td style="text-align:right">'+feature.properties.a_nb_ventes+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature.properties.a_prix_m2+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature.properties.a_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature.properties.a_surface_moyenne+"m²"+'</span>'+'</td></tr>'
-        +'<tr><td>'+'<span style="color:#424242;">'+"Ensemble "+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre de ventes"+'</td><td style="text-align:right">'+feature.properties.t_nb_ventes+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature.properties.t_prix_m2+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature.properties.t_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature.properties.t_surface_moyenne+"m²"+'</span>'+'</td></tr>'
-        +'</table></strong>')
+        +'<tr><td class="cellule-titre-gauche">'+"Maisons"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Nombre de ventes"+'</td><td class="cellule-droite">'+feature.properties.m_nb_ventes+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix moyen au m²"+'</td><td class="cellule-droite">'+feature.properties.m_prix_m2+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Montant moyen des ventes"+'</td><td class="cellule-droite">'+feature.properties.m_prix_vente_moyen+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Superficie moyenne"+'</td><td class="cellule-droite">'+feature.properties.m_surface_moyenne+"m²"+'</td></tr>'
+        +'<tr><td class="cellule-titre-gauche">'+"Appartements"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Nombre de ventes"+'</td><td class="cellule-droite">'+feature.properties.a_nb_ventes+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix moyen au m²"+'</td><td class="cellule-droite">'+feature.properties.a_prix_m2+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Montant moyen des ventes"+'</td><td class="cellule-droite">'+feature.properties.a_prix_vente_moyen+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Superficie moyenne"+'</td><td class="cellule-droite">'+feature.properties.a_surface_moyenne+"m²"+'</td></tr>'
+        +'<tr><td class="cellule-titre-gauche">'+"Total "+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Nombre de ventes"+'</td><td class="cellule-droite">'+feature.properties.t_nb_ventes+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix moyen au m²"+'</td><td class="cellule-droite">'+feature.properties.t_prix_m2+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Montant moyen des ventes"+'</td><td class="cellule-droite">'+feature.properties.t_prix_vente_moyen+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Superficie moyenne"+'</td><td class="cellule-droite">'+feature.properties.t_surface_moyenne+"m²"+'</td></tr>'
+        +'</table>')
         .addTo(map)
         .setMaxWidth("500px");
             });
@@ -264,14 +266,48 @@ map.on('click', 'dvfpoints2018', function (e) {
     var popup2 = new mapboxgl.Popup({closeButton: true})
         .setLngLat(map.unproject(e.point))
         .setHTML(
-        '<strong>'
+        '<table>'
+        +'<tr><td class="popup-titre">'+feature2.properties.type_local+'</td></tr></table>'
         +'<table>'
-        +'<tr><td style="color:#424242;">'+"Type"+'</td><td style="text-align:right;color:#424242;">'+feature2.properties.type_local+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Numéro parcelle"+'</td><td style="text-align:right">'+feature2.properties.id_parcelle+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix au m²"+'</td><td style="text-align:right">'+feature2.properties.prix_m2+'</span>'+"€"+'</td></tr>'
-        +'<tr><td>'+"Prix de vente"+'</td><td style="text-align:right">'+feature2.properties.prix_vente+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie"+'</td><td style="text-align:right">'+feature2.properties.surface_reelle_bati+"m²"+'</span>'+'</td></tr>'
-        +'</table></strong>')
+        +'<tr><td class="cellule-gauche">'+"Numéro parcelle"+'</td><td class="cellule-droite">'+feature2.properties.id_parcelle+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix au m²"+'</td><td class="cellule-droite">'+feature2.properties.prix_m2+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix de vente"+'</td><td class="cellule-droite">'+feature2.properties.prix_vente+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Superficie"+'</td><td class="cellule-droite">'+feature2.properties.surface_reelle_bati+"m²"+'</td></tr>'
+        +'</table>')
+        .addTo(map)
+        .setMaxWidth("500px");
+            });
+
+map.on('click', 'dvfiris2018', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfiris2018'] });
+    if (!features.length) {
+        return;
+    }
+    var feature3 = features[0];
+
+    var popup3 = new mapboxgl.Popup({closeButton: true})
+        .setLngLat(map.unproject(e.point))
+        .setHTML(
+        '<table>'
+        +'<tr><td class="popup-titre">'+feature3.properties.nom_iris+'</td></tr>'
+        +'<tr><td class="popup-titre-2">'+"IRIS "+feature3.properties.code_iris+'</td></tr></table>'
+        +'<table>'
+        +'<tr><td class="cellule-titre-gauche">'+"Maisons"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Nombre de ventes"+'</td><td class="cellule-droite">'+feature3.properties.m_nb_ventes+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix moyen au m²"+'</td><td class="cellule-droite">'+feature3.properties.m_prix_m2+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Montant moyen des ventes"+'</td><td class="cellule-droite">'+feature3.properties.m_prix_vente_moyen+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Superficie moyenne"+'</td><td class="cellule-droite">'+feature3.properties.m_surface_moyenne+"m²"+'</td></tr>'
+        +'<tr><td class="cellule-titre-gauche">'+"Appartements"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Nombre de ventes"+'</td><td class="cellule-droite">'+feature3.properties.a_nb_ventes+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix moyen au m²"+'</td><td class="cellule-droite">'+feature3.properties.a_prix_m2+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Montant moyen des ventes"+'</td><td class="cellule-droite">'+feature3.properties.a_prix_vente_moyen+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Superficie moyenne"+'</td><td class="cellule-droite">'+feature3.properties.a_surface_moyenne+"m²"+'</td></tr>'
+        +'<tr><td class="cellule-titre-gauche">'+"Total "+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Nombre de ventes"+'</td><td class="cellule-droite">'+feature3.properties.t_nb_ventes+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Prix moyen au m²"+'</td><td class="cellule-droite">'+feature3.properties.t_prix_m2+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Montant moyen des ventes"+'</td><td class="cellule-droite">'+feature3.properties.t_prix_vente_moyen+"€"+'</td></tr>'
+        +'<tr><td class="cellule-gauche">'+"Superficie moyenne"+'</td><td class="cellule-droite">'+feature3.properties.t_surface_moyenne+"m²"+'</td></tr>'
+        +'</table>')
         .addTo(map)
         .setMaxWidth("500px");
             });
@@ -279,7 +315,7 @@ map.on('click', 'dvfpoints2018', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfcommunes2018','dvfpoints2018'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfcommunes2018', 'dvfiris2018', 'dvfpoints2018'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

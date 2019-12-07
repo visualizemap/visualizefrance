@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<title> Demandes de valeurs foncières</title>
+<title>Prix moyen au m² en 2018</title>
 <meta charset='utf-8' />
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/visualizemap/visualizefrance/master/documents/favicon.png">
@@ -215,8 +215,8 @@ map.on('click', 'dvfcommunes2018', function (e) {
         .setMaxWidth("500px");
             });
 
-map.on('click', 'dvfappartementspoints2018', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfappartementspoints2018'] });
+map.on('click', 'dvfpoints2018', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfpoints2018'] });
     if (!features.length) {
         return;
     }
@@ -230,18 +230,17 @@ map.on('click', 'dvfappartementspoints2018', function (e) {
         +'<table>'
         +'<tr><td>'+'<span style="color:#424242;">'+"Appartement(s)"+'</span>'+'</td></tr>'
         +'<tr><td>'+"Numéro parcelle"+'</td><td style="text-align:right">'+feature2.properties.id_parcelle+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre de vente(s)"+'</td><td style="text-align:right">'+feature2.properties.a_nb_ventes+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature2.properties.a_prix_m2+'</span>'+"€"+'</td></tr>'
-        +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature2.properties.a_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature2.properties.a_surface_moyenne+"m²"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Prix au m²"+'</td><td style="text-align:right">'+feature2.properties.prix_m2+'</span>'+"€"+'</td></tr>'
+        +'<tr><td>'+"Prix de vente"+'</td><td style="text-align:right">'+feature2.properties.prix_vente+"€"+'</span>'+'</td></tr>'
+        +'<tr><td>'+"Superficie"+'</td><td style="text-align:right">'+feature2.properties.surface_reelle_bati+"m²"+'</span>'+'</td></tr>'
         +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");
             });
 
 
-map.on('click', 'dvfmaisonspoints2018', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfmaisonspoints2018'] });
+map.on('click', 'dvfiris2018', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfiris2018'] });
     if (!features.length) {
         return;
     }
@@ -251,15 +250,26 @@ map.on('click', 'dvfmaisonspoints2018', function (e) {
     var popup3 = new mapboxgl.Popup({closeButton: true})
         .setLngLat(map.unproject(e.point))
         .setHTML(
-        '<strong>'
-        +'<table>'
-        +'<tr><td>'+'<span style="color:#424242;">'+"Maison(s)"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Numéro parcelle"+'</td><td style="text-align:right">'+feature3.properties.id_parcelle+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Nombre de vente(s)"+'</td><td style="text-align:right">'+feature3.properties.m_nb_ventes+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature3.properties.m_prix_m2+'</span>'+"€"+'</td></tr>'
-        +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature3.properties.m_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
-        +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature3.properties.m_surface_moyenne+"m²"+'</span>'+'</td></tr>'
-        +'</table></strong>')
+          '<strong>'
+          +'<table>'
+          +'<tr><td>'+"Commune"+'</td><td style="text-align:right">'+feature.properties.libcom+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Code postal"+'</td><td style="text-align:right">'+feature.properties.cpostal+'</span>'+'</td></tr>'
+          +'<tr><td>'+'<span style="color:#424242;">'+"Maisons"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Nombre de ventes"+'</td><td style="text-align:right">'+feature.properties.m_nb_ventes+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature.properties.m_prix_m2+"€"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature.properties.m_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature.properties.m_surface_moyenne+"m²"+'</span>'+'</td></tr>'
+          +'<tr><td>'+'<span style="color:#424242;">'+"Appartements"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Nombre de ventes"+'</td><td style="text-align:right">'+feature.properties.a_nb_ventes+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature.properties.a_prix_m2+"€"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature.properties.a_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature.properties.a_surface_moyenne+"m²"+'</span>'+'</td></tr>'
+          +'<tr><td>'+'<span style="color:#424242;">'+"Ensemble "+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Nombre de ventes"+'</td><td style="text-align:right">'+feature.properties.t_nb_ventes+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Prix moyen au m²"+'</td><td style="text-align:right">'+feature.properties.t_prix_m2+"€"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Montant moyen des ventes"+'</td><td style="text-align:right">'+feature.properties.t_prix_vente_moyen+"€"+'</span>'+'</td></tr>'
+          +'<tr><td>'+"Superficie moyenne"+'</td><td style="text-align:right">'+feature.properties.t_surface_moyenne+"m²"+'</span>'+'</td></tr>'
+          +'</table></strong>')
         .addTo(map)
         .setMaxWidth("500px");
             });
@@ -267,7 +277,7 @@ map.on('click', 'dvfmaisonspoints2018', function (e) {
 // Use the same approach as above to indicate that the symbols are clickable
 // by changing the cursor style to 'pointer'.
 map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfcommunes2018','dvfappartementspoints2018','dvfmaisonspoints2018'] });
+    var features = map.queryRenderedFeatures(e.point, { layers: ['dvfcommunes2018','dvfpoints2018','dvfiris2018'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
 

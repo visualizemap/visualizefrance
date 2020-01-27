@@ -205,7 +205,7 @@ center: [4.859171776685287, 45.73291396168358], // lyon starting position [lng, 
 zoom: 8.5, // starting zoom
 attributionControl: false
 });
-var hoveredStateId =  null;
+var hoveredId =  null;
 
 var scale = new mapboxgl.ScaleControl({
     maxWidth: 150,
@@ -214,7 +214,7 @@ var scale = new mapboxgl.ScaleControl({
 
 
 map.on('load', function() {
-map.addSource('states', {
+map.addSource('states',{
 type: 'vector',
 url: 'mapbox://visualizemap.2md6q2p0'
 });
@@ -225,9 +225,10 @@ map.addLayer({
 'id': 'state-fills',
 'type': 'fill',
 'source': 'states',
+'source-layer': 'uga-47mngn',
 'layout': {},
 'paint': {
-'fill-color': '#627BC1',
+'fill-color': '#F44336',
 'fill-opacity': [
 'case',
 ['boolean', ['feature-state', 'hover'], false],
@@ -241,12 +242,45 @@ map.addLayer({
 'id': 'state-borders',
 'type': 'line',
 'source': 'states',
+'source-layer': 'uga-47mngn',
+
 'layout': {},
 'paint': {
 'line-color': '#627BC1',
-'line-width': 2
+'line-width': 1
 }
 });
+
+// When the user moves their mouse over the state-fill layer, we'll update the
+// feature state for the feature under the mouse.
+map.on('mousemove', 'state-fills', function(e) {
+if (e.features.length > 0) {
+if (hoveredId) {
+map.setFeatureState(
+{ source: 'states', id: hoveredId },
+{ hover: false }
+);
+}
+hoveredId = e.features[0].id;
+map.setFeatureState(
+{ source: 'states', id: hoveredId },
+{ hover: true }
+);
+}
+});
+
+// When the mouse leaves the state-fill layer, update the feature state of the
+// previously hovered feature.
+map.on('mouseleave', 'state-fills', function() {
+if (hoveredId) {
+map.setFeatureState(
+{ source: 'states', id: hoveredId },
+{ hover: false }
+);
+}
+hoveredId = null;
+});
+
 });
 
 map.addControl(scale,'bottom-left');

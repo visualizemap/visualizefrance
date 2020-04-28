@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Test</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+.calculation-box {
+height: 100px;
+width: 150px;
+position: absolute;
+bottom: 120px;
+left: 10px;
+background-color: rgba(255, 255, 255, 0.9);
+padding: 15px;
+text-align: center;
+}
+
+p {
+font-family: 'Open Sans';
+margin: 0;
+font-size: 13px;
+}
+</style>
+
+<script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css" type="text/css"/>
+
+<link
+rel="stylesheet"
+href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css"
+type="text/css"
+/>
+<div id="map"></div>
+<div class="calculation-box">
+<p>Dessiner un polygon avec l’outil à droite pour connaître la superfice en m² au sol d’une zone.</p>
+<div id="calculated-area"></div>
+</div>
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoidmlzdWFsaXplbWFwIiwiYSI6ImNqd2ZtdGJubTB6OWszem94OXY4cWJwNmsifQ.WqWlggNCGyyoyNCGGXbPdg';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/visualizemap/ck9jzzlc30u231io4s0p3rbns', //hosted style id
+center: [2.3498737866627835, 48.853067223431],
+zoom: 18, // starting zoom
+pitch: 60
+});
+
+var draw = new MapboxDraw({
+displayControlsDefault: false,
+controls: {
+polygon: true,
+trash: true
+}
+});
+// bouton de navigation
+map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+// mode plein écran
+map.addControl(new mapboxgl.FullscreenControl({
+  container: document.querySelector('html')
+}), 'top-right');
+
+// bouton de géolocalisation
+map.addControl(
+  new mapboxgl.GeolocateControl({
+    positionOptions: {
+      enableHighAccuracy: true
+    },
+    trackUserLocation: true
+  }),
+  'top-right');
+
+// échelle de la carte (en mètres)
+var scale = new mapboxgl.ScaleControl({
+  maxWidth: 150,
+  unit: 'imperial',
+});
+
+map.addControl(scale, 'bottom-left');
+scale.setUnit('metric');
+
+map.addControl(new MapboxGeocoder({
+accessToken: mapboxgl.accessToken,
+zoom: 8.5,
+language: 'fr',
+// countries: 'fr',
+placeholder: 'Rechercher un lieu',
+collapsed: false,
+mapboxgl: mapboxgl
+}), 'top-left');
+
+
+map.addControl(draw,'top-right');
+
+map.on('draw.create', updateArea);
+map.on('draw.delete', updateArea);
+map.on('draw.update', updateArea);
+
+var data = '';
+var centroid = '';
+var coord = [0,0];
+
+var marker = new mapboxgl.Marker()
+.setLngLat(coord)
+//.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setHTML(rounded_area +'m²'))
+.addTo(map);
+
+var popup = new mapboxgl.Popup({ closeOnClick: false })
+.setLngLat(coord)
+.setHTML()
+.addTo(map);
+
+
+function updateArea(e) {
+
+var data = draw.getAll();
+var answer = document.getElementById('calculated-area');
+if (data.features.length > 0) {
+
+var area = turf.area(data);
+// restrict to area to 2 decimal points
+var rounded_area = Math.round(area * 100) / 100;
+answer.innerHTML =
+'<p><strong>' +
+rounded_area +'m²';
+var centroid = turf.centroid(data);
+//var pt = turf.point(centroid);
+var coord = turf.getCoord(centroid);
+
+popup.remove();
+marker.remove();
+marker = new mapboxgl.Marker()
+.setLngLat(coord)
+//.setPopup(new mapboxgl.Popup({ closeOnClick: false }).setHTML(rounded_area +'m²'))
+.addTo(map);
+
+
+var popupOffsets = {
+ 'top': [10, 20],
+ };
+
+
+popup = new mapboxgl.Popup({ closeOnClick: false, offset: popupOffsets})
+.setLngLat(coord)
+.setHTML(rounded_area +'m²')
+.addTo(map);
+
+console.log(coord);
+
+} else {
+answer.innerHTML = '';
+popup.remove();
+marker.remove();
+
+if (e.type !== 'draw.delete')
+alert('Dessiner un polygon avec l’outil à droite pour connaître la superfice en m² au sol d’une zone.');
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
